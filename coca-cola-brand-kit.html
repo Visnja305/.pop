@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coca-Cola Brand Identity & Guidelines</title>
+  
+  <!-- Google Fonts Connection -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* -------------------------------------------------------------
+       CORE DESIGN SYSTEM & CUSTOM VARIABLES
+       ------------------------------------------------------------- */
+    :root {
+      /* Colors - Inspired by Coca-Cola Heritage and Modern Editorial Dark */
+      --color-primary-accent: #E41E26;      /* Coca-Cola Brand Red */
+      --color-primary-glow: rgba(228, 30, 38, 0.15);
+      --color-primary-dark: #A71015;        /* Deep Crimson */
+      --color-bg-primary: #0A0707;          /* Luxury Cherry Black */
+      --color-bg-card: #130F0F;             /* Deep Charcoal Card */
+      --color-bg-inner: #1D1717;            /* Inner Element Dark Brown-Red */
+      --color-text-primary: #FBF9F6;        /* Warm Cream Cream */
+      --color-text-muted: #9B8F8F;          /* Warm Rose Gray */
+      --color-border: #2E2121;              /* Subtle Warm Crimson Border */
+      --color-white: #FFFFFF;
+      
+      /* Typography */
+      --font-headings: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+      
+      /* Transitions */
+      --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Reset & Base Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--color-bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-border);
+      border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-primary-accent);
+    }
+
+    /* Selection Highlight */
+    ::selection {
+      background-color: var(--color-primary-accent);
+      color: var(--color-white);
+    }
+
+    /* Typography Utilities */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-headings);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--color-white) 40%, var(--color-primary-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 6px 16px;
+      border-radius: 100px;
+      border: 1px solid var(--color-border);
+      background-color: rgba(29, 23, 23, 0.4);
+      color: var(--color-primary-accent);
+      margin-bottom: 20px;
+    }
+
+    /* -------------------------------------------------------------
+       LAYOUT UTILITIES
+       ------------------------------------------------------------- */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 100px 0 60px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .section-title-wrap {
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--color-white);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 28px;
+      background-color: var(--color-primary-accent);
+      border-radius: 4px;
+      box-shadow: 0 0 15px var(--color-primary-accent);
+    }
+
+    .section-subtitle {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+      font-weight: 400;
+      max-width: 650px;
+      margin-left: 26px;
+    }
+
+    .card {
+      background-color: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      border-color: rgba(228, 30, 38, 0.3);
+      box-shadow: 0 0 35px rgba(228, 30, 38, 0.05);
+    }
+
+    /* -------------------------------------------------------------
+       NAVIGATION
+       ------------------------------------------------------------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(10, 7, 7, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 20px 0;
+      transition: var(--transition-smooth);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .nav-logo-text {
+      font-family: var(--font-headings);
+      font-weight: 800;
+      font-size: 1.65rem;
+      color: var(--color-primary-accent);
+      letter-spacing: -0.03em;
+      font-style: italic;
+    }
+
+    .nav-logo-tag {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: 1px solid rgba(228, 30, 38, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--color-white);
+      margin-left: 6px;
+      background: var(--color-primary-accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--color-text-muted);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: var(--transition-smooth);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--color-primary-accent);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-links a:hover {
+      color: var(--color-white);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* -------------------------------------------------------------
+       HERO SECTION
+       ------------------------------------------------------------- */
+    .hero-section {
+      position: relative;
+      padding: 100px 0 80px 0;
+      overflow: hidden;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(228, 30, 38, 0.08) 0%, rgba(10, 7, 7, 0) 75%);
+      top: -250px;
+      right: -100px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 4.2rem;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      font-weight: 800;
+    }
+
+    .hero-description {
+      color: var(--color-text-muted);
+      font-size: 1.15rem;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background-color: var(--color-primary-accent);
+      color: var(--color-white);
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 16px 36px;
+      border-radius: 8px;
+      box-shadow: 0 4px 25px rgba(228, 30, 38, 0.3);
+      transition: var(--transition-smooth);
+      border: 1px solid transparent;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 35px rgba(228, 30, 38, 0.5);
+      background-color: var(--color-white);
+      color: var(--color-bg-primary);
+    }
+
+    .cta-button svg {
+      transition: var(--transition-smooth);
+    }
+
+    .cta-button:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Mockup Display Box */
+    .hero-branding-mockup {
+      width: 100%;
+      height: 440px;
+      border-radius: 24px;
+      border: 1px solid var(--color-border);
+      background: radial-gradient(circle at center, rgba(29, 23, 23, 0.6) 0%, rgba(10, 7, 7, 0.95) 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+    }
+
+    .hero-branding-mockup::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      padding: 1.5px;
+      background: linear-gradient(135deg, rgba(228, 30, 38, 0.45) 0%, rgba(29, 23, 23, 0.05) 50%, rgba(228, 30, 38, 0.15) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .mockup-img-container {
+      width: 90%;
+      height: 90%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      animation: floatMockup 8s ease-in-out infinite;
+    }
+
+    .mockup-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.7));
+    }
+
+    .mockup-brand-glow {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(228, 30, 38, 0.4) 0%, rgba(228, 30, 38, 0) 70%);
+      filter: blur(20px);
+      z-index: -1;
+    }
+
+    @keyframes floatMockup {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* -------------------------------------------------------------
+       BRAND VIBE & ARCHETYPE
+       ------------------------------------------------------------- */
+    .archetype-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .archetype-card-left {
+      background: linear-gradient(135deg, var(--color-bg-card) 0%, rgba(46, 33, 33, 0.2) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .archetype-heading {
+      font-size: 1.8rem;
+      color: var(--color-white);
+      margin-bottom: 16px;
+    }
+
+    .archetype-tag {
+      display: inline-flex;
+      font-weight: 700;
+      color: var(--color-primary-accent);
+      font-family: var(--font-body);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+    }
+
+    .archetype-quote {
+      font-family: var(--font-headings);
+      font-size: 1.6rem;
+      line-height: 1.4;
+      font-style: italic;
+      color: var(--color-white);
+      border-left: 3px solid var(--color-primary-accent);
+      padding-left: 20px;
+      margin-bottom: 24px;
+    }
+
+    .tone-list-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .tone-card {
+      background-color: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .tone-title {
+      font-family: var(--font-headings);
+      font-size: 1.35rem;
+      color: var(--color-primary-accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tone-desc {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* -------------------------------------------------------------
+       COLOR PALETTE SECTION
+       ------------------------------------------------------------- */
+    .colors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .color-card {
+      background-color: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 24px;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .color-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .swatch-display {
+      width: 100%;
+      height: 160px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .color-details {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .color-name-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .color-name-large {
+      font-family: var(--font-headings);
+      font-size: 1.3rem;
+      color: var(--color-white);
+      font-weight: 700;
+    }
+
+    .color-usage-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .color-codes-wrap {
+      margin-top: 10px;
+      background-color: rgba(10, 7, 7, 0.4);
+      border-radius: 10px;
+      border: 1px solid var(--color-border);
+      padding: 12px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .code-row {
+      display: flex;
+      justify-content: space-between;
+      color: var(--color-text-muted);
+    }
+
+    .code-value {
+      color: var(--color-text-primary);
+    }
+
+    .color-copy-row {
+      margin-top: 14px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .copy-color-btn {
+      background: none;
+      border: 1px solid var(--color-border);
+      color: var(--color-primary-accent);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: var(--transition-smooth);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .copy-color-btn:hover {
+      background-color: var(--color-primary-accent);
+      color: var(--color-white);
+      border-color: var(--color-primary-accent);
+    }
+
+    /* -------------------------------------------------------------
+       TYPOGRAPHY PAIRING & TESTER
+       ------------------------------------------------------------- */
+    .typo-layout-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .typo-spec-card {
+      background-color: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .font-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 16px;
+    }
+
+    .font-title {
+      font-family: var(--font-headings);
+      font-size: 1.75rem;
+      color: var(--color-white);
+    }
+
+    .font-badge {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--color-primary-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .typo-spec-list {
+      list-style: none;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+    }
+
+    .typo-spec-list strong {
+      color: var(--color-white);
+    }
+
+    .typo-tester-card {
+      background-color: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .tester-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .tester-inputs label {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+    }
+
+    .tester-textarea {
+      background-color: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      color: var(--color-white);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      padding: 14px;
+      width: 100%;
+      height: 80px;
+      resize: none;
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+
+    .tester-textarea:focus {
+      border-color: var(--color-primary-accent);
+      box-shadow: 0 0 15px rgba(228, 30, 38, 0.15);
+    }
+
+    .tester-preview-box {
+      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .preview-headline {
+      font-family: var(--font-headings);
+      font-size: 2.8rem;
+      line-height: 1.15;
+      color: var(--color-white);
+      word-wrap: break-word;
+    }
+
+    .preview-body {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--color-text-muted);
+      word-wrap: break-word;
+    }
+
+    /* -------------------------------------------------------------
+       LOGO SPEC & DYNAMIC RIBBON
+       ------------------------------------------------------------- */
+    .logo-spec-card {
+      margin-bottom: 32px;
+    }
+
+    .logo-layout-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .ribbon-display {
+      width: 100%;
+      height: 250px;
+      background: linear-gradient(135deg, #1D1717 0%, #0A0707 100%);
+      border-radius: 16px;
+      border: 1px solid var(--color-border);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Beautiful custom SVG logo recreation */
+    .coca-cola-svg-logo {
+      width: 75%;
+      height: auto;
+      filter: drop-shadow(0 4px 15px rgba(228, 30, 38, 0.3));
+    }
+
+    .logo-rules-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .logo-rules-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .logo-rules-icon {
+      color: var(--color-primary-accent);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .logo-rules-title {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 4px;
+    }
+
+    .logo-rules-desc {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    /* -------------------------------------------------------------
+       DO'S & DON'TS INTERACTIVE GRID
+       ------------------------------------------------------------- */
+    .guideline-controls {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+      gap: 16px;
+    }
+
+    .control-btn {
+      background: none;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 12px 28px;
+      border-radius: 8px;
+      transition: var(--transition-smooth);
+    }
+
+    .control-btn:hover {
+      border-color: var(--color-primary-accent);
+      color: var(--color-white);
+    }
+
+    .control-btn.active {
+      background-color: var(--color-primary-accent);
+      color: var(--color-white);
+      border-color: var(--color-primary-accent);
+      box-shadow: 0 4px 15px rgba(228, 30, 38, 0.35);
+    }
+
+    .rules-display-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .rule-card {
+      background-color: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: var(--transition-smooth);
+    }
+
+    .rule-visual {
+      width: 100%;
+      height: 140px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      background-color: var(--color-bg-primary);
+    }
+
+    .rule-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .rule-badge.do {
+      background-color: rgba(12, 196, 129, 0.15);
+      color: #0CC481;
+      border: 1px solid rgba(12, 196, 129, 0.3);
+    }
+
+    .rule-badge.dont {
+      background-color: rgba(239, 68, 68, 0.15);
+      color: #EF4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .rule-card-title {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--color-white);
+    }
+
+    .rule-card-desc {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* -------------------------------------------------------------
+       DEVELOPER INTEGRATION (CSS STYLES)
+       ------------------------------------------------------------- */
+    .dev-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .code-block-container {
+      background-color: rgba(10, 7, 7, 0.6);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .code-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+    }
+
+    .copy-code-btn {
+      background: none;
+      border: 1px solid var(--color-border);
+      color: var(--color-primary-accent);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: var(--transition-smooth);
+    }
+
+    .copy-code-btn:hover {
+      background-color: var(--color-primary-accent);
+      color: var(--color-white);
+      border-color: var(--color-primary-accent);
+    }
+
+    pre {
+      margin: 0;
+      overflow-x: auto;
+    }
+
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      color: #D1C4C4;
+      line-height: 1.5;
+    }
+
+    /* -------------------------------------------------------------
+       TOAST NOTIFICATION
+       ------------------------------------------------------------- */
+    #toast {
+      visibility: hidden;
+      min-width: 280px;
+      background-color: var(--color-bg-card);
+      color: var(--color-primary-accent);
+      border: 1px solid var(--color-primary-accent);
+      box-shadow: 0 8px 30px rgba(228, 30, 38, 0.25);
+      text-align: center;
+      border-radius: 8px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1000;
+      left: 50%;
+      bottom: 40px;
+      transform: translateX(-50%);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: visibility 0s, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* -------------------------------------------------------------
+       RESPONSIVE DESIGN (MEDIA QUERIES)
+       ------------------------------------------------------------- */
+    @media (max-width: 991px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .hero-title {
+        font-size: 3.2rem;
+      }
+
+      .hero-branding-mockup {
+        height: 380px;
+      }
+
+      .archetype-grid, .typo-layout-grid, .logo-layout-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .section {
+        padding: 60px 0 40px 0;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .hero-title {
+        font-size: 2.6rem;
+      }
+
+      .tone-list-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none; /* simple mobile stack fallback */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast">Value Copied!</div>
+
+  <!-- STICKY HEADER -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="nav-logo">
+        <span class="nav-logo-text">Coca-Cola</span>
+        <span class="nav-logo-tag">Brand Spec</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#hero">Overview</a></li>
+        <li><a href="#vibe">Voice & Story</a></li>
+        <li><a href="#colors">Colors</a></li>
+        <li><a href="#typography">Typography</a></li>
+        <li><a href="#logos">Logo Assets</a></li>
+        <li><a href="#rules">Rules</a></li>
+        <li><a href="#dev">Developer</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="hero-section">
+    <div class="hero-glow"></div>
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="badge">Official Brand Kit &bull; Spec-1886</span>
+        <h1 class="hero-title gradient-text">Real Magic is just a sip away.</h1>
+        <p class="hero-description">
+          For over 135 years, Coca-Cola has existed to craft simple moments of connection, optimism, and physical refreshment. Our visual identity balances a timeless Spencerian script script-mark with pure, energetic crimson fields, creating an immediately recognizable beacon of simple happiness. This brand spec defines the visual, typographic, and verbal framework that keeps Coca-Cola unified across every touchpoint worldwide.
+        </p>
+        <a href="#vibe" class="cta-button">
+          Discover Brand Identity
+          <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 1L11 5L7 9M11 5H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="hero-branding-mockup">
+        <div class="mockup-img-container">
+          <div class="mockup-brand-glow"></div>
+          <img src="./coca_cola_mockup.png" alt="Sleek Coca Cola Glass Bottle Mockup" class="mockup-img">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOICE & STORY -->
+  <section id="vibe" class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Brand Voice & Persona</h2>
+        <p class="section-subtitle">Understanding the archetype, personality, and tone that drives our global message.</p>
+      </div>
+
+      <div class="archetype-grid">
+        <!-- Archetype card -->
+        <div class="card archetype-card-left">
+          <div>
+            <span class="archetype-tag">Core Brand Archetype</span>
+            <h3 class="archetype-heading">The Innocent</h3>
+            <div class="archetype-quote">
+              "Bringing simple happiness, nostalgic comfort, and optimistic celebration to everyday lives."
+            </div>
+          </div>
+          <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6;">
+            We speak not from a position of superiority, but of shared connection. We focus on common human values, refreshing the body and uplifting the spirit with simple, direct messaging.
+          </p>
+        </div>
+
+        <!-- Tone grid -->
+        <div class="tone-list-grid">
+          <!-- Tone 1 -->
+          <div class="tone-card">
+            <h4 class="tone-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              Optimistic
+            </h4>
+            <p class="tone-desc">Always focusing on the positive, active side of life. Our campaigns invite participation, celebrate friendship, and look to a unified future.</p>
+          </div>
+          <!-- Tone 2 -->
+          <div class="tone-card">
+            <h4 class="tone-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg>
+              Authentic
+            </h4>
+            <p class="tone-desc">Warm, honest, and grounded in heritage. We speak to real people in real-life scenarios, eschewing cold corporate jargon or hyper-technical claims.</p>
+          </div>
+          <!-- Tone 3 -->
+          <div class="tone-card">
+            <h4 class="tone-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              Inclusive (Universal)
+            </h4>
+            <p class="tone-desc">Coca-Cola belongs to everyone. Our language is simple, clear, and translated across cultures without losing its essential sense of welcoming togetherness.</p>
+          </div>
+          <!-- Tone 4 -->
+          <div class="tone-card">
+            <h4 class="tone-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8L20 10h-9l1-8z"></path></svg>
+              Refreshing
+            </h4>
+            <p class="tone-desc">Crisp, sensory, and active. We use words that evoke visual imagery, taste, and physical invigoration: pop, fizz, ice-cold, crisp, and sparkling.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLORS -->
+  <section id="colors" class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Color System</h2>
+        <p class="section-subtitle">Our iconic color palette, featuring dynamic red accents, clean whites, and secondary rich dark tones.</p>
+      </div>
+
+      <div class="colors-grid">
+        <!-- Brand Red -->
+        <div class="color-card">
+          <div class="swatch-display" style="background-color: #E41E26; box-shadow: 0 0 25px rgba(228, 30, 38, 0.45);"></div>
+          <div class="color-details">
+            <div class="color-name-row">
+              <span class="color-name-large">Coke Red</span>
+              <span class="color-usage-label">Primary</span>
+            </div>
+            <div class="color-codes-wrap">
+              <div class="code-row"><span>HEX</span><span class="code-value">#E41E26</span></div>
+              <div class="code-row"><span>RGB</span><span class="code-value">228, 30, 38</span></div>
+              <div class="code-row"><span>CMYK</span><span class="code-value">4, 99, 95, 0</span></div>
+              <div class="code-row"><span>Pantone</span><span class="code-value">PMS 185 C</span></div>
+            </div>
+            <div class="color-copy-row">
+              <button class="copy-color-btn" onclick="copyValue('#E41E26', 'Hex Code Copied!')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                Copy HEX
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spencerian White -->
+        <div class="color-card">
+          <div class="swatch-display" style="background-color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.1);"></div>
+          <div class="color-details">
+            <div class="color-name-row">
+              <span class="color-name-large">Spencerian White</span>
+              <span class="color-usage-label">Accent</span>
+            </div>
+            <div class="color-codes-wrap">
+              <div class="code-row"><span>HEX</span><span class="code-value">#FFFFFF</span></div>
+              <div class="code-row"><span>RGB</span><span class="code-value">255, 255, 255</span></div>
+              <div class="code-row"><span>CMYK</span><span class="code-value">0, 0, 0, 0</span></div>
+              <div class="code-row"><span>Pantone</span><span class="code-value">Clean White</span></div>
+            </div>
+            <div class="color-copy-row">
+              <button class="copy-color-btn" onclick="copyValue('#FFFFFF', 'Hex Code Copied!')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                Copy HEX
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cherry Black -->
+        <div class="color-card">
+          <div class="swatch-display" style="background-color: #0A0707; border: 1px solid var(--color-border);"></div>
+          <div class="color-details">
+            <div class="color-name-row">
+              <span class="color-name-large">Cherry Black</span>
+              <span class="color-usage-label">Background</span>
+            </div>
+            <div class="color-codes-wrap">
+              <div class="code-row"><span>HEX</span><span class="code-value">#0A0707</span></div>
+              <div class="code-row"><span>RGB</span><span class="code-value">10, 7, 7</span></div>
+              <div class="code-row"><span>CMYK</span><span class="code-value">75, 68, 67, 90</span></div>
+              <div class="code-row"><span>Pantone</span><span class="code-value">Process Black C</span></div>
+            </div>
+            <div class="color-copy-row">
+              <button class="copy-color-btn" onclick="copyValue('#0A0707', 'Hex Code Copied!')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                Copy HEX
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Warm Cream -->
+        <div class="color-card">
+          <div class="swatch-display" style="background-color: #FBF9F6;"></div>
+          <div class="color-details">
+            <div class="color-name-row">
+              <span class="color-name-large">Warm Cream</span>
+              <span class="color-usage-label">Typography</span>
+            </div>
+            <div class="color-codes-wrap">
+              <div class="code-row"><span>HEX</span><span class="code-value">#FBF9F6</span></div>
+              <div class="code-row"><span>RGB</span><span class="code-value">251, 249, 246</span></div>
+              <div class="code-row"><span>CMYK</span><span class="code-value">1, 1, 3, 0</span></div>
+              <div class="code-row"><span>Pantone</span><span class="code-value">Warm Gray 1 C</span></div>
+            </div>
+            <div class="color-copy-row">
+              <button class="copy-color-btn" onclick="copyValue('#FBF9F6', 'Hex Code Copied!')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                Copy HEX
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section id="typography" class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Typography System</h2>
+        <p class="section-subtitle">How we pair class-leading serif headlines with precise, clean body sans-serif forms.</p>
+      </div>
+
+      <div class="typo-layout-grid">
+        <!-- Font Spec Card -->
+        <div class="typo-spec-card">
+          <div>
+            <div class="font-header-row">
+              <h3 class="font-title">Playfair Display</h3>
+              <span class="font-badge">Headings &amp; Editorial</span>
+            </div>
+            <ul class="typo-spec-list">
+              <li><strong>Weights:</strong> Bold (700), Extra Bold (800)</li>
+              <li><strong>Letter Spacing:</strong> -0.015em (Tight)</li>
+              <li><strong>Usage:</strong> Main titles, hero statements, large editorial highlights.</li>
+            </ul>
+          </div>
+          
+          <div style="margin-top: 30px;">
+            <div class="font-header-row">
+              <h3 class="font-title" style="font-family: var(--font-body); font-weight: 600;">Inter</h3>
+              <span class="font-badge" style="color: var(--color-white);">Body &amp; Metadata</span>
+            </div>
+            <ul class="typo-spec-list">
+              <li><strong>Weights:</strong> Regular (400), Medium (500), Semi-Bold (600)</li>
+              <li><strong>Letter Spacing:</strong> Normal, or +0.06em (Uppercase Labels)</li>
+              <li><strong>Usage:</strong> Body paragraphs, specifications, interface controls, buttons.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Interactive Font Tester -->
+        <div class="typo-tester-card">
+          <div class="tester-inputs">
+            <label for="tester-text">Live Typography Tester</label>
+            <textarea id="tester-text" class="tester-textarea" placeholder="Type your custom brand messaging here..." oninput="updateTypographyPreview(this.value)">Real Magic is Refreshing. Open a Coke, open happiness.</textarea>
+          </div>
+          <div class="tester-preview-box">
+            <div>
+              <span class="font-badge" style="margin-bottom: 6px; display: inline-block;">Playfair Display Preview</span>
+              <div id="preview-h" class="preview-headline">Real Magic is Refreshing. Open a Coke, open happiness.</div>
+            </div>
+            <div>
+              <span class="font-badge" style="margin-bottom: 6px; display: inline-block; color: var(--color-white);">Inter Body Preview</span>
+              <div id="preview-b" class="preview-body">Real Magic is Refreshing. Open a Coke, open happiness. Our visual architecture pairs editorial curves with tight geometric body structures to create a highly readable experience.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO ASSETS & WAVE -->
+  <section id="logos" class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Brand Assets & Ribbon</h2>
+        <p class="section-subtitle">Guidelines surrounding the script mark, alignment, and the iconic Coca-Cola Dynamic Ribbon Device.</p>
+      </div>
+
+      <div class="logo-spec-card card">
+        <div class="logo-layout-grid">
+          <!-- Logo Display -->
+          <div class="ribbon-display">
+            <!-- Dynamic Ribbon Graphic in Custom SVG -->
+            <svg class="coca-cola-svg-logo" viewBox="0 0 200 65" xmlns="http://www.w3.org/2000/svg">
+              <!-- Re-creation of Coca-Cola elegant vector style -->
+              <path d="M10,25 C40,5 60,45 100,25 C140,5 160,45 190,25 C170,40 140,15 100,35 C60,55 30,10 10,25 Z" fill="#E41E26" opacity="0.8"/>
+              <path d="M5,35 C35,15 65,40 100,30 C135,20 165,45 195,35 C175,45 135,28 100,38 C65,48 25,25 5,35 Z" fill="#FFFFFF"/>
+              <!-- Elegant Typography overlay -->
+              <text x="50%" y="42%" font-family="var(--font-headings)" font-size="16" font-weight="800" font-style="italic" fill="#FFFFFF" text-anchor="middle" letter-spacing="-0.05em">Coca-Cola</text>
+            </svg>
+          </div>
+
+          <!-- Specifications list -->
+          <ul class="logo-rules-list">
+            <li class="logo-rules-item">
+              <div class="logo-rules-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="12" cy="12" r="1"></circle></svg>
+              </div>
+              <div>
+                <h4 class="logo-rules-title">Script Logo Clear Space</h4>
+                <p class="logo-rules-desc">A minimum boundary of space must surround the logo at all times. This clear space is proportional to the height of the capital letter "C" in the wordmark.</p>
+              </div>
+            </li>
+            
+            <li class="logo-rules-item">
+              <div class="logo-rules-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <div>
+                <h4 class="logo-rules-title">The Dynamic Ribbon Device</h4>
+                <p class="logo-rules-desc">The fluid, sweeping wave represents the physical motion of liquid. In modern digital assets, the white ribbon sits beneath the script mark to reinforce visual energy.</p>
+              </div>
+            </li>
+
+            <li class="logo-rules-item">
+              <div class="logo-rules-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+              </div>
+              <div>
+                <h4 class="logo-rules-title">Red Canvas Domination</h4>
+                <p class="logo-rules-desc">Our brand red should occupy at least 60% of brand touchpoints. Digital mockups use Cherry Black backgrounds to establish luxury, but retain red for focal highlights.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND RULES (DO'S & DON'TS) -->
+  <section id="rules" class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Brand Application Rules</h2>
+        <p class="section-subtitle">How to apply colors, layouts, and logos consistently. Switch views below to see correct vs prohibited layouts.</p>
+      </div>
+
+      <!-- Controls -->
+      <div class="guideline-controls">
+        <button id="btn-dos" class="control-btn active" onclick="toggleRules('dos')">Approved Uses (Do's)</button>
+        <button id="btn-donts" class="control-btn" onclick="toggleRules('donts')">Prohibited (Don'ts)</button>
+      </div>
+
+      <!-- Rules Cards Grid -->
+      <div id="rules-grid" class="rules-display-grid">
+        <!-- Dynamically Loaded via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- DEVELOPER SPECS -->
+  <section id="dev" class="section" style="border-bottom: none;">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Developer Integration</h2>
+        <p class="section-subtitle">Quickly copy the brand CSS variables and tokens to integrate Coca-Cola branding into web layouts.</p>
+      </div>
+
+      <div class="dev-grid">
+        <div class="code-block-container">
+          <div class="code-block-header">
+            <span>CSS Variables Configuration</span>
+            <button class="copy-code-btn" onclick="copyValue(document.getElementById('css-vars').innerText, 'CSS variables copied!')">Copy CSS Code</button>
+          </div>
+          <pre><code id="css-vars">/* Coca-Cola Brand Design System Tokens */
+:root {
+  --coke-red: #E41E26;
+  --coke-white: #FFFFFF;
+  --coke-black: #0A0707;
+  --coke-cream: #FBF9F6;
+  --coke-glow: rgba(228, 30, 38, 0.15);
+  
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+  
+  --transition-default: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --border-brand: 1px solid #2E2121;
+}
+
+/* Base Headings Layout */
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  color: var(--coke-white);
+  font-weight: 700;
+}
+
+/* Primary Button Styling */
+.btn-brand-primary {
+  background-color: var(--coke-red);
+  color: var(--coke-white);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px var(--coke-glow);
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="border-top: 1px solid var(--color-border); padding: 40px 0; text-align: center; background-color: var(--color-bg-primary);">
+    <div class="container">
+      <p style="font-family: var(--font-headings); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-muted);">
+        &copy; 2026 Coca-Cola Mock Brand Kit. All rights reserved. Crafted with absolute brand precision.
+      </p>
+    </div>
+  </footer>
+
+  <!-- INTERACTIVE SCRIPTS -->
+  <script>
+    // Data definition for Do's and Don'ts
+    const rulesData = {
+      dos: [
+        {
+          title: "Sufficent Contrast Background",
+          desc: "Place the Spencerian script logo on a solid high-contrast field of Coca-Cola Red (#E41E26) or Cherry Black (#0A0707) for optimal readability.",
+          badge: "Do",
+          style: "background-color: #E41E26; color: #FFFFFF;",
+          innerHtml: '<span style="font-family: var(--font-headings); font-size: 2.2rem; font-style: italic; font-weight: 800;">Coca-Cola</span>'
+        },
+        {
+          title: "Proportional Clear Space",
+          desc: "Allow breathing room on all sides of the wordmark equal to or greater than the height of the letter 'C' in the logo.",
+          badge: "Do",
+          style: "background-color: #130F0F; color: #FFFFFF; border: 1px dashed var(--color-primary-accent); padding: 20px;",
+          innerHtml: '<div style="border: 1px solid rgba(255,255,255,0.2); padding: 10px 30px;"><span style="font-family: var(--font-headings); font-size: 1.5rem; font-style: italic; font-weight: 800;">Coca-Cola</span></div>'
+        },
+        {
+          title: "Pure Accent Red Use",
+          desc: "Utilize Coca-Cola red as a focal highlight for call-to-actions, badges, active indicators, and brand-defining containers.",
+          badge: "Do",
+          style: "background-color: #130F0F; display: flex; flex-direction: column; gap: 8px;",
+          innerHtml: '<button style="background-color: #E41E26; color: #fff; border:none; padding: 10px 20px; font-weight:700; font-family:var(--font-body); border-radius:4px; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; cursor:pointer;">Primary Action</button>'
+        }
+      ],
+      donts: [
+        {
+          title: "Low Contrast & Noise",
+          desc: "Never overlay the white script wordmark on light-gray backgrounds, noisy textures, or busy product photography.",
+          badge: "Don't",
+          style: "background: linear-gradient(45deg, #bbb, #eee); color: #fff;",
+          innerHtml: '<span style="font-family: var(--font-headings); font-size: 2.2rem; font-style: italic; font-weight: 800; opacity: 0.7;">Coca-Cola</span>'
+        },
+        {
+          title: "Geometric Distortion",
+          desc: "Never stretch, squeeze, skew, or rotate the logotype. It must always be oriented horizontally and scaled proportionally.",
+          badge: "Don't",
+          style: "background-color: #130F0F;",
+          innerHtml: '<div style="transform: scaleX(1.8) scaleY(0.6);"><span style="font-family: var(--font-headings); font-size: 1.5rem; font-style: italic; font-weight: 800; color: #E41E26;">Coca-Cola</span></div>'
+        },
+        {
+          title: "Prohibited Gradient Fills",
+          desc: "Do not fill the wordmark with multi-colored gradients, patterns, or drop shadows. Keep the lockup solid white or solid red.",
+          badge: "Don't",
+          style: "background-color: #130F0F;",
+          innerHtml: '<span style="font-family: var(--font-headings); font-size: 2.2rem; font-style: italic; font-weight: 800; background: linear-gradient(to right, #00FF00, #FFFF00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Coca-Cola</span>'
+        }
+      ]
+    };
+
+    // Update typography live tester preview
+    function updateTypographyPreview(val) {
+      const headline = document.getElementById('preview-h');
+      const body = document.getElementById('preview-b');
+      
+      headline.textContent = val || "Real Magic is Refreshing.";
+      body.textContent = (val || "Real Magic is Refreshing.") + " Our visual architecture pairs editorial curves with tight geometric body structures to create a highly readable experience.";
+    }
+
+    // Toggle showing Do's vs Don'ts
+    function toggleRules(type) {
+      const grid = document.getElementById('rules-grid');
+      const btnDos = document.getElementById('btn-dos');
+      const btnDonts = document.getElementById('btn-donts');
+      
+      // Update active states on buttons
+      if (type === 'dos') {
+        btnDos.classList.add('active');
+        btnDonts.classList.remove('active');
+      } else {
+        btnDonts.classList.add('active');
+        btnDos.classList.remove('active');
+      }
+      
+      // Clear current grid
+      grid.innerHTML = '';
+      
+      // Load selected rules
+      rulesData[type].forEach(rule => {
+        const card = document.createElement('div');
+        card.className = 'rule-card';
+        
+        card.innerHTML = `
+          <div class="rule-visual" style="${rule.style}">
+            <span class="rule-badge ${type === 'dos' ? 'do' : 'dont'}">${rule.badge}</span>
+            ${rule.innerHtml}
+          </div>
+          <div class="rule-card-title">${rule.title}</div>
+          <div class="rule-card-desc">${rule.desc}</div>
+        `;
+        
+        grid.appendChild(card);
+      });
+    }
+
+    // Copy general value to clipboard (HEX or CSS Code)
+    function copyValue(val, successMsg) {
+      const tempInput = document.createElement('textarea');
+      tempInput.value = val;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      tempInput.setSelectionRange(0, 99999);
+      
+      try {
+        document.execCommand('copy');
+        showToast(successMsg);
+      } catch (err) {
+        console.error('Failed to copy', err);
+      }
+      
+      document.body.removeChild(tempInput);
+    }
+
+    // Show custom toast notification
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // Initialize with approved rules showing
+    window.onload = function() {
+      toggleRules('dos');
+    };
+  </script>
+</body>
+</html>

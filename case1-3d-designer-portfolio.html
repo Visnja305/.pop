@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Leo Vance, a freelance UX/UI designer specializing in immersive 3D web interactions, interactive design, and premium digital experiences.">
+  <title>Leo Vance | Creative 3D UX/UI Designer & Developer</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Design Tokens */
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: rgba(20, 20, 30, 0.6);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      
+      /* Neon Accents */
+      --cyan-neon: #00f2fe;
+      --pink-neon: #ff007f;
+      --cyan-glow: rgba(0, 242, 254, 0.35);
+      --pink-glow: rgba(255, 0, 127, 0.35);
+      
+      --font-headings: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --transition-fast: all 0.2s ease;
+      --border-radius: 16px;
+    }
+
+    /* Base Setup */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Lighting Effects */
+    .glow-sphere {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(120px);
+      opacity: 0.15;
+    }
+    .glow-sphere-1 {
+      top: -100px;
+      left: -100px;
+      background: var(--cyan-neon);
+    }
+    .glow-sphere-2 {
+      top: 600px;
+      right: -150px;
+      background: var(--pink-neon);
+    }
+    .glow-sphere-3 {
+      bottom: 200px;
+      left: -100px;
+      background: var(--cyan-neon);
+    }
+
+    /* Layout Containers */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(10, 10, 15, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+    }
+
+    .logo {
+      font-family: var(--font-headings);
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.05em;
+      text-decoration: none;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo span {
+      background: linear-gradient(90deg, var(--cyan-neon), var(--pink-neon));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition-fast);
+      position: relative;
+      padding: 0.25rem 0;
+    }
+
+    .nav-link:hover {
+      color: var(--text-main);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan-neon), var(--pink-neon));
+      transition: var(--transition-fast);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-nav:hover {
+      background: linear-gradient(90deg, var(--cyan-neon), var(--pink-neon));
+      border-color: transparent;
+      color: #000;
+      box-shadow: 0 0 15px var(--cyan-glow);
+    }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 110;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 25px;
+      height: 2px;
+      background-color: var(--text-main);
+      transition: var(--transition-smooth);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 100px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-text h1 {
+      font-family: var(--font-headings);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-text h1 span {
+      background: linear-gradient(135deg, var(--cyan-neon), var(--pink-neon));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--cyan-neon);
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background-color: var(--cyan-neon);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--cyan-neon);
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--cyan-neon), var(--pink-neon));
+      color: #000;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 25px var(--cyan-glow);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 1rem 2rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--text-muted);
+      transform: translateY(-2px);
+    }
+
+    /* 3D Interactive Card Scene */
+    .scene-3d {
+      perspective: 1000px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 450px;
+    }
+
+    .card-3d {
+      position: relative;
+      width: 320px;
+      height: 420px;
+      background: linear-gradient(135deg, rgba(20, 20, 35, 0.8), rgba(10, 10, 15, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      transform-style: preserve-3d;
+      transition: box-shadow 0.1s ease, border-color 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-3d:hover {
+      border-color: var(--cyan-neon);
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.15), 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-header-3d {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transform: translateZ(50px);
+    }
+
+    .card-chip {
+      width: 40px;
+      height: 30px;
+      background: linear-gradient(135deg, #ffd700, #ffa500);
+      border-radius: 6px;
+      opacity: 0.8;
+    }
+
+    .card-icon-3d {
+      width: 32px;
+      height: 32px;
+      color: var(--cyan-neon);
+    }
+
+    .card-body-3d {
+      transform: translateZ(80px);
+      margin-bottom: 2rem;
+    }
+
+    .card-body-3d h3 {
+      font-family: var(--font-headings);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #fff, var(--text-muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .card-body-3d p {
+      font-size: 0.9rem;
+      color: var(--cyan-neon);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    .card-footer-3d {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      transform: translateZ(60px);
+    }
+
+    .card-status {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .card-status-value {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--pink-neon);
+    }
+
+    .card-glare {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 80%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 5;
+    }
+
+    /* Section Global Styles */
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .section-title-wrapper {
+      margin-bottom: 4rem;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      color: var(--cyan-neon);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-headings);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* Projects / Work Section */
+    .filter-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-filter {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition-fast);
+    }
+
+    .btn-filter:hover, .btn-filter.active {
+      color: #000;
+      background: var(--cyan-neon);
+      border-color: var(--cyan-neon);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--cyan-neon), var(--pink-neon));
+      opacity: 0;
+      transition: var(--transition-fast);
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-img-wrapper {
+      height: 220px;
+      background: linear-gradient(135deg, rgba(30, 30, 50, 0.8), rgba(15, 15, 25, 0.9));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Abstract UI Illustration within cards */
+    .project-illustration {
+      width: 70%;
+      height: 60%;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      background: rgba(10, 10, 15, 0.6);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem;
+      gap: 0.5rem;
+      transform: perspective(400px) rotateX(10deg);
+      transition: var(--transition-smooth);
+    }
+
+    .project-card:hover .project-illustration {
+      transform: perspective(400px) rotateX(0deg) scale(1.05);
+      border-color: var(--cyan-neon);
+    }
+
+    .ui-top-bar {
+      display: flex;
+      gap: 4px;
+    }
+    .ui-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+    }
+    .ui-dot:nth-child(1) { background-color: var(--pink-neon); }
+    .ui-dot:nth-child(2) { background-color: var(--cyan-neon); }
+    
+    .ui-content-blocks {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .ui-line {
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.05);
+    }
+    .ui-line-main {
+      width: 80%;
+      background: linear-gradient(90deg, var(--cyan-neon), transparent);
+    }
+    .ui-grid-blocks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem;
+      flex: 1;
+    }
+    .ui-block {
+      background: rgba(255,255,255,0.02);
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 4px;
+    }
+
+    .project-tags {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .project-badge {
+      background: rgba(10, 10, 15, 0.85);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.3rem 0.7rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .project-info {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .project-info h3 {
+      font-family: var(--font-headings);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-info p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--cyan-neon);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      align-self: flex-start;
+      transition: var(--transition-fast);
+    }
+
+    .project-link svg {
+      width: 16px;
+      height: 16px;
+      transition: transform var(--transition-fast);
+    }
+
+    .project-link:hover {
+      color: var(--pink-neon);
+    }
+
+    .project-link:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Skills & Technology Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .skill-card:hover {
+      border-color: var(--pink-neon);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(255, 0, 127, 0.05);
+    }
+
+    .skill-icon-wrapper {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--cyan-neon);
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-card:hover .skill-icon-wrapper {
+      color: var(--pink-neon);
+      border-color: rgba(255, 0, 127, 0.3);
+      background: rgba(255, 0, 127, 0.05);
+    }
+
+    .skill-card h3 {
+      font-family: var(--font-headings);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Interactive Contact Section */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 4rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 3.5rem;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .contact-details h3 {
+      font-family: var(--font-headings);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-details p {
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-icon-box {
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--cyan-neon);
+    }
+
+    .contact-text-box span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-text-box a, .contact-text-box p {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: var(--transition-fast);
+      margin: 0;
+    }
+
+    .contact-text-box a:hover {
+      color: var(--cyan-neon);
+    }
+
+    /* Form Styles */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.9rem 1.2rem;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: var(--transition-fast);
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--cyan-neon);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.15);
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .error-msg {
+      font-size: 0.8rem;
+      color: #ff3366;
+      margin-top: 0.4rem;
+      display: none;
+      font-weight: 500;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(90deg, var(--cyan-neon), var(--pink-neon));
+      border: none;
+      color: #000;
+      padding: 1.1rem;
+      border-radius: var(--border-radius);
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: var(--transition-smooth);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-submit:hover {
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Success message block */
+    .form-success-message {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1rem;
+      animation: fadeIn 0.5s forwards;
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(0, 242, 254, 0.1);
+      color: var(--cyan-neon);
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+    }
+
+    .form-success-message h4 {
+      font-family: var(--font-headings);
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-success-message p {
+      color: var(--text-muted);
+      max-width: 320px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 0;
+      background: rgba(5, 5, 8, 0.9);
+    }
+
+    .footer-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copyright {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .social-link {
+      color: var(--text-muted);
+      transition: var(--transition-fast);
+    }
+
+    .social-link:hover {
+      color: var(--cyan-neon);
+      transform: translateY(-2px);
+    }
+
+    /* Responsiveness */
+    @media (max-width: 968px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        text-align: center;
+      }
+      
+      .hero-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .scene-3d {
+        height: 400px;
+      }
+
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 2.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: rgba(10, 10, 15, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-left: 1px solid var(--border-color);
+        flex-direction: column;
+        justify-content: center;
+        padding: 3rem;
+        transition: var(--transition-smooth);
+        z-index: 105;
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .nav-menu.active ~ .menu-toggle span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+      }
+
+      .nav-menu.active ~ .menu-toggle span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav-menu.active ~ .menu-toggle span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+      }
+
+      .nav-link {
+        font-size: 1.1rem;
+      }
+
+      .footer-wrapper {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Glow Spheres -->
+  <div class="glow-sphere glow-sphere-1"></div>
+  <div class="glow-sphere glow-sphere-2"></div>
+  <div class="glow-sphere glow-sphere-3"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#" class="logo">LEO<span>.VANCE</span></a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#" class="nav-link active-link">Home</a></li>
+        <li><a href="#work" class="nav-link">Work</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="#contact" class="btn-nav">Hire Me</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <div class="hero-tag">Specialist in WebGL & 3D Web UI</div>
+        <h1>Design that feels <span>three-dimensional</span>.</h1>
+        <p class="hero-desc">
+          I build high-performance, immersive 3D digital experiences and spatial interfaces that bridge the gap between design excellence and technical performance.
+        </p>
+        <div class="hero-actions">
+          <a href="#work" class="btn-primary">
+            View Work
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20" height="20">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 13l-7 7-7-7m14-6l-7 7-7-7"></path>
+            </svg>
+          </a>
+          <a href="#contact" class="btn-secondary">Let's Talk</a>
+        </div>
+      </div>
+      
+      <div class="scene-3d">
+        <!-- Interactive 3D tilt card -->
+        <div class="card-3d" id="tiltCard">
+          <div class="card-glare" id="cardGlare"></div>
+          <div class="card-header-3d">
+            <div class="card-chip"></div>
+            <svg class="card-icon-3d" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="32" height="32">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path>
+            </svg>
+          </div>
+          <div class="card-body-3d">
+            <h3>SPATIAL UI</h3>
+            <p>WebGL / Three.js / Shaders</p>
+          </div>
+          <div class="card-footer-3d">
+            <div>
+              <div class="card-status">CURRENT STATUS</div>
+              <div class="card-status-value">OPEN FOR FREELANCE</div>
+            </div>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24" height="24" style="color: var(--pink-neon);">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work/Portfolio Section -->
+  <section id="work">
+    <div class="container">
+      <div class="section-title-wrapper">
+        <span class="section-subtitle">Selected Work</span>
+        <h2 class="section-title">Case Studies & Experiments</h2>
+      </div>
+
+      <div class="filter-wrapper">
+        <button class="btn-filter active" data-filter="all">All Projects</button>
+        <button class="btn-filter" data-filter="3d">3D WebGL</button>
+        <button class="btn-filter" data-filter="uiux">UI/UX Design</button>
+        <button class="btn-filter" data-filter="dev">Development</button>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid">
+        <!-- Project 1 -->
+        <div class="project-card" data-category="3d">
+          <div class="project-img-wrapper">
+            <div class="project-illustration">
+              <div class="ui-top-bar">
+                <div class="ui-dot"></div>
+                <div class="ui-dot"></div>
+                <div class="ui-dot"></div>
+              </div>
+              <div class="ui-content-blocks">
+                <div class="ui-line ui-line-main"></div>
+                <div class="ui-grid-blocks">
+                  <div class="ui-block"></div>
+                  <div class="ui-block" style="border-color: var(--pink-neon);"></div>
+                </div>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="project-badge">Three.js</span>
+              <span class="project-badge">GLSL</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3>Vortex: Spatial Audio Visualizer</h3>
+            <p>An interactive, browser-based spatializer that maps complex audio frequencies to 3D particle systems using custom fragment shaders.</p>
+            <a href="#contact" class="project-link">
+              Explore Experiment
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card" data-category="uiux">
+          <div class="project-img-wrapper">
+            <div class="project-illustration">
+              <div class="ui-top-bar">
+                <div class="ui-dot"></div>
+                <div class="ui-dot"></div>
+              </div>
+              <div class="ui-content-blocks" style="justify-content: center; align-items: center;">
+                <div class="ui-block" style="width: 50px; height: 50px; border-radius: 50%; border-color: var(--cyan-neon);"></div>
+                <div class="ui-line" style="width: 60px;"></div>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="project-badge">Figma</span>
+              <span class="project-badge">Prototyping</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3>Aura: Smart Ring Companion App</h3>
+            <p>UX/UI architecture and mobile design system for a bio-tracking smart ring, featuring dynamic dark/light HSL gradients and rich health metrics.</p>
+            <a href="#contact" class="project-link">
+              View Design Case
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card" data-category="dev">
+          <div class="project-img-wrapper">
+            <div class="project-illustration">
+              <div class="ui-top-bar">
+                <div class="ui-dot"></div>
+                <div class="ui-dot"></div>
+                <div class="ui-dot"></div>
+              </div>
+              <div class="ui-content-blocks">
+                <div class="ui-line" style="width: 90%;"></div>
+                <div class="ui-line" style="width: 40%; background: var(--pink-neon);"></div>
+                <div class="ui-line" style="width: 75%;"></div>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="project-badge">Next.js</span>
+              <span class="project-badge">GSAP</span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3>Nebula Commerce: Immersive Retail</h3>
+            <p>E-commerce checkout prototype with ultra-fluid web layouts, smooth page transitions, and interactive 3D product previews.</p>
+            <a href="#contact" class="project-link">
+              See Case Study
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" style="background: rgba(255,255,255,0.01); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="section-title-wrapper">
+        <span class="section-subtitle">Core Capabilities</span>
+        <h2 class="section-title">Design & Technical Stack</h2>
+      </div>
+
+      <div class="skills-grid">
+        <!-- Skill 1 -->
+        <div class="skill-card">
+          <div class="skill-icon-wrapper">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24" height="24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3>WebGL Development</h3>
+          <p>Writing custom vertex and fragment shaders using GLSL. Building fluid, performance-focused web animations using Three.js and custom math.</p>
+        </div>
+
+        <!-- Skill 2 -->
+        <div class="skill-card">
+          <div class="skill-icon-wrapper">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24" height="24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3>Interactive Design</h3>
+          <p>Figma prototyping with complex components, variables, and auto-layouts. Deep understanding of transitions, animations, and micro-interactions.</p>
+        </div>
+
+        <!-- Skill 3 -->
+        <div class="skill-card">
+          <div class="skill-icon-wrapper">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24" height="24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+          </div>
+          <h3>Front-End Dev</h3>
+          <p>Writing clean, semantic, and modular TypeScript and React code. Focused on performance optimization, responsive layouts, and modern builds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-wrapper">
+        <div class="contact-details">
+          <h3>Let's build something epic.</h3>
+          <p>Looking for a creative developer to help you turn flat designs into responsive, beautiful, interactive web experiences? Let's connect.</p>
+          
+          <div class="contact-info-list">
+            <div class="contact-info-item">
+              <div class="contact-icon-box">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20" height="20">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div class="contact-text-box">
+                <span>Direct Email</span>
+                <a href="mailto:hello@leovance.design">hello@leovance.design</a>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-icon-box">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20" height="20">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <div class="contact-text-box">
+                <span>Location</span>
+                <p>New York, NY (Available Remote)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <!-- Interactive Form Container -->
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" id="name" class="form-input" placeholder="e.g. Sarah Connor">
+              <div class="error-msg" id="nameError">Please enter your name.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" id="email" class="form-input" placeholder="e.g. sarah@example.com">
+              <div class="error-msg" id="emailError">Please enter a valid email address.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label">Project Details</label>
+              <textarea id="message" class="form-textarea" placeholder="Tell me a bit about your project goals and scope..."></textarea>
+              <div class="error-msg" id="messageError">Please share some project details.</div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btnSubmit">
+              Send Inquiry
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18" height="18">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </form>
+
+          <!-- Form Success Message -->
+          <div class="form-success-message" id="successMessage">
+            <div class="success-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" width="32" height="32">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <h4>Message Sent!</h4>
+            <p>Thanks for reaching out, I'll get back to you within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-wrapper">
+      <div class="footer-copyright">
+        &copy; 2026 Leo Vance. All rights reserved. Made in NYC.
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-link" aria-label="GitHub">
+          <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C19.138 20.193 22 16.44 22 12.017 22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+          </svg>
+        </a>
+        <a href="#" class="social-link" aria-label="LinkedIn">
+          <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+            <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Mobile navigation toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      
+      menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+      });
+
+      // Close menu when clicking a link
+      document.querySelectorAll('.nav-link, .btn-nav').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+        });
+      });
+
+      // Highlight active navigation section on scroll
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (pageYOffset >= (sectionTop - 120)) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active-link');
+          if (link.getAttribute('href').slice(1) === current) {
+            link.classList.add('active-link');
+          }
+        });
+      });
+
+      // 2. Interactive 3D Card Tilt Effect
+      const card = document.getElementById('tiltCard');
+      const glare = document.getElementById('cardGlare');
+
+      if (card) {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left; // x position within the element
+          const y = e.clientY - rect.top;  // y position within the element
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          // Calculate rotation angles based on position relative to center
+          // Max rotation of 15 degrees
+          const rotateX = ((centerY - y) / centerY) * 15;
+          const rotateY = ((x - centerX) / centerX) * 15;
+          
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          
+          // Position glare effect
+          const glareX = (x / rect.width) * 100;
+          const glareY = (y / rect.height) * 100;
+          glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)`;
+          glare.style.opacity = '1';
+        });
+
+        card.addEventListener('mouseleave', () => {
+          // Reset tilt on leave
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+          glare.style.opacity = '0';
+        });
+      }
+
+      // 3. Project Filter Logic
+      const filterBtns = document.querySelectorAll('.btn-filter');
+      const projects = document.querySelectorAll('.project-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active class
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const category = btn.getAttribute('data-filter');
+
+          // Filter elements
+          projects.forEach(project => {
+            if (category === 'all' || project.getAttribute('data-category') === category) {
+              project.style.display = 'flex';
+              // Add simple fade animation
+              project.style.animation = 'fadeIn 0.4s forwards';
+            } else {
+              project.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // 4. Contact Form Validation and Submission
+      const form = document.getElementById('contactForm');
+      const successMessage = document.getElementById('successMessage');
+      
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const messageInput = document.getElementById('message');
+
+      const nameError = document.getElementById('nameError');
+      const emailError = document.getElementById('emailError');
+      const messageError = document.getElementById('messageError');
+
+      // Email validity checker
+      const isValidEmail = (email) => {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+      };
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let isFormValid = true;
+
+        // Reset errors
+        nameError.style.display = 'none';
+        emailError.style.display = 'none';
+        messageError.style.display = 'none';
+
+        // Check Name
+        if (!nameInput.value.trim()) {
+          nameError.style.display = 'block';
+          isFormValid = false;
+        }
+
+        // Check Email
+        if (!emailInput.value.trim() || !isValidEmail(emailInput.value.trim())) {
+          emailError.style.display = 'block';
+          isFormValid = false;
+        }
+
+        // Check Message
+        if (!messageInput.value.trim()) {
+          messageError.style.display = 'block';
+          isFormValid = false;
+        }
+
+        if (isFormValid) {
+          // Hide form and show success message
+          form.style.display = 'none';
+          successMessage.style.display = 'flex';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

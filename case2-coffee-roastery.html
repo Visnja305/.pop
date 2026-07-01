@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Elysian Roastery - Seattle-based boutique organic roastery sourcing sustainable single-origin coffee. Discover our beans and try our interactive brew calculator.">
+  <title>Elysian Roastery | Artisan Organic Coffee & Brew Calculator</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Design System Tokens */
+    :root {
+      --color-cream: #fbf9f4;
+      --color-green: #1a3b32;
+      --color-green-light: #244f43;
+      --color-gold: #c28b5a;
+      --color-gold-light: #d1a37c;
+      --color-charcoal: #2d2a26;
+      --color-sand: #f3edd7;
+      --color-card-bg: #f5f1e8;
+      
+      --font-serif: 'Playfair Display', serif;
+      --font-sans: 'Outfit', sans-serif;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --border-radius: 12px;
+    }
+
+    /* Base Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--color-cream);
+      color: var(--color-charcoal);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Header & Navigation */
+    header {
+      background-color: var(--color-cream);
+      border-bottom: 1px solid rgba(26, 59, 50, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--color-green);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      color: var(--color-gold);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--color-charcoal);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--color-green);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background-color: var(--color-gold);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .btn-cta {
+      background-color: var(--color-green);
+      color: var(--color-cream);
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition-smooth);
+      border: 1px solid var(--color-green);
+    }
+
+    .btn-cta:hover {
+      background-color: transparent;
+      color: var(--color-green);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 6rem 0;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      color: var(--color-green);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-content h1 span {
+      font-style: italic;
+      color: var(--color-gold);
+      font-weight: 400;
+    }
+
+    .hero-content p {
+      font-size: 1.15rem;
+      color: rgba(45, 42, 38, 0.8);
+      margin-bottom: 2.5rem;
+      max-width: 540px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    .btn-primary {
+      background-color: var(--color-green);
+      color: var(--color-cream);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-green-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(26, 59, 50, 0.15);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 1.5px solid var(--color-green);
+      color: var(--color-green);
+      padding: 1rem 2rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(26, 59, 50, 0.04);
+      transform: translateY(-2px);
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Abstract Illustration of Coffee Pour */
+    .coffee-illustration {
+      width: 320px;
+      height: 380px;
+      background: var(--color-card-bg);
+      border-radius: 120px 120px 24px 24px;
+      border: 1px solid rgba(26, 59, 50, 0.08);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 3rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+    }
+
+    .illustration-drip {
+      width: 4px;
+      height: 120px;
+      background: linear-gradient(to bottom, var(--color-gold), transparent);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: dripAnimation 3s infinite ease-in-out;
+    }
+
+    .illustration-cup {
+      width: 140px;
+      height: 100px;
+      background: var(--color-cream);
+      border: 2px solid var(--color-green);
+      border-radius: 0 0 70px 70px;
+      position: relative;
+      box-shadow: 0 10px 20px rgba(26, 59, 50, 0.05);
+    }
+
+    .illustration-cup::after {
+      content: '';
+      width: 30px;
+      height: 50px;
+      border: 2px solid var(--color-green);
+      border-left: none;
+      border-radius: 0 25px 25px 0;
+      position: absolute;
+      top: 20px;
+      right: -32px;
+    }
+
+    @keyframes dripAnimation {
+      0% { height: 0; opacity: 0; }
+      50% { height: 180px; opacity: 1; }
+      100% { height: 180px; opacity: 0; }
+    }
+
+    /* Sections */
+    section {
+      padding: 7rem 0;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      color: var(--color-green);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--color-gold);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 3.5rem;
+      display: block;
+    }
+
+    /* Coffee Blends Section */
+    .blends-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .blend-card {
+      background: var(--color-card-bg);
+      border: 1px solid rgba(26, 59, 50, 0.05);
+      border-radius: var(--border-radius);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-smooth);
+    }
+
+    .blend-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(26, 59, 50, 0.06);
+      border-color: rgba(26, 59, 50, 0.15);
+    }
+
+    .blend-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1rem;
+    }
+
+    .blend-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--color-green);
+      font-weight: 600;
+    }
+
+    .blend-origin {
+      font-size: 0.85rem;
+      color: var(--color-gold);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .blend-desc {
+      color: rgba(45, 42, 38, 0.8);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .blend-notes {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .blend-note-badge {
+      background: rgba(194, 139, 90, 0.12);
+      color: #925c2c;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Brew Calculator Section */
+    .calculator-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      background: var(--color-card-bg);
+      border: 1px solid rgba(26, 59, 50, 0.05);
+      border-radius: 24px;
+      padding: 3.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    }
+
+    .calc-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .input-label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--color-green);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .select-input, .number-input {
+      width: 100%;
+      background: var(--color-cream);
+      border: 1px solid rgba(26, 59, 50, 0.15);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      color: var(--color-charcoal);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 500;
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+
+    .select-input:focus, .number-input:focus {
+      border-color: var(--color-green);
+      box-shadow: 0 0 0 3px rgba(26, 59, 50, 0.05);
+    }
+
+    /* Range Slider */
+    .range-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .range-slider {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(26, 59, 50, 0.1);
+      outline: none;
+    }
+
+    .range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--color-green);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .range-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      background: var(--color-gold);
+    }
+
+    .range-value {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-green);
+      min-width: 75px;
+      text-align: right;
+    }
+
+    /* Results panel */
+    .calc-results {
+      background: var(--color-cream);
+      border: 1px solid rgba(26, 59, 50, 0.08);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+      border-bottom: 1px dashed rgba(26, 59, 50, 0.1);
+    }
+
+    .result-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .result-label {
+      font-size: 0.95rem;
+      color: rgba(45, 42, 38, 0.7);
+    }
+
+    .result-value {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-green);
+    }
+
+    .result-value span {
+      font-size: 0.95rem;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--color-gold);
+      margin-left: 0.15rem;
+    }
+
+    /* Brew Timer Feature */
+    .timer-container {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: rgba(194, 139, 90, 0.06);
+      border: 1px solid rgba(194, 139, 90, 0.15);
+      border-radius: var(--border-radius);
+      text-align: center;
+    }
+
+    .timer-display {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--color-green);
+      margin: 0.5rem 0;
+    }
+
+    .timer-status {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-gold);
+      font-weight: 600;
+      min-height: 20px;
+    }
+
+    .btn-timer {
+      background-color: var(--color-gold);
+      color: var(--color-cream);
+      border: none;
+      padding: 0.65rem 1.5rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-timer:hover {
+      background-color: var(--color-green);
+    }
+
+    /* Newsletter section */
+    .newsletter {
+      background-color: var(--color-green);
+      color: var(--color-cream);
+      text-align: center;
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .newsletter h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      margin-bottom: 1rem;
+    }
+
+    .newsletter p {
+      color: rgba(251, 249, 244, 0.8);
+      max-width: 500px;
+      margin: 0 auto 2.5rem auto;
+    }
+
+    .newsletter-form {
+      display: flex;
+      justify-content: center;
+      max-width: 500px;
+      margin: 0 auto;
+      gap: 0.5rem;
+      position: relative;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 1rem 1.25rem;
+      border-radius: var(--border-radius);
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .btn-subscribe {
+      background-color: var(--color-gold);
+      color: var(--color-cream);
+      border: none;
+      padding: 0 2rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-subscribe:hover {
+      background-color: var(--color-gold-light);
+    }
+
+    .newsletter-error {
+      color: #ff8888;
+      font-size: 0.85rem;
+      position: absolute;
+      bottom: -28px;
+      left: 10px;
+      display: none;
+      font-weight: 500;
+    }
+
+    .newsletter-success {
+      display: none;
+      animation: fadeIn 0.4s forwards;
+    }
+
+    .newsletter-success h4 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      color: var(--color-gold);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--color-charcoal);
+      color: rgba(251, 249, 244, 0.6);
+      padding: 4rem 0;
+      border-top: 1px solid rgba(251, 249, 244, 0.05);
+      font-size: 0.9rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand h3 {
+      font-family: var(--font-serif);
+      color: var(--color-cream);
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand p {
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    .footer-list {
+      list-style: none;
+    }
+
+    .footer-list-title {
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      color: var(--color-gold);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-list li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-list a {
+      color: rgba(251, 249, 244, 0.6);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-list a:hover {
+      color: var(--color-cream);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(251, 249, 244, 0.08);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 968px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+        padding: 4rem 0;
+      }
+      
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .calculator-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 2.5rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+      }
+
+      .footer-brand {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0 1rem;
+      }
+
+      .btn-subscribe {
+        padding: 1rem 0;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-brand {
+        grid-column: span 1;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo">elysian<span>.roastery</span></a>
+      <ul class="nav-links">
+        <li><a href="#blends" class="nav-link">Our Blends</a></li>
+        <li><a href="#calc" class="nav-link">Brew Calculator</a></li>
+        <li><a href="#about" class="nav-link">Our Story</a></li>
+        <li><a href="#calc" class="btn-cta">Start Brewing</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero">
+      <div class="hero-content">
+        <h1>Single-origin coffee, roasted in <span>Seattle</span>.</h1>
+        <p>We source organic, microlot coffee beans directly from ethical farms globally, slow-roasting each batch to highlight its complex, natural flavor notes.</p>
+        <div class="hero-buttons">
+          <a href="#blends" class="btn-primary">Explore Blends</a>
+          <a href="#calc" class="btn-secondary">Brew Calculator</a>
+        </div>
+      </div>
+      <div class="hero-image-wrapper">
+        <div class="coffee-illustration">
+          <div class="illustration-drip"></div>
+          <div class="illustration-cup"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signature Blends -->
+  <section id="blends" style="background-color: rgba(26, 59, 50, 0.02); border-top: 1px solid rgba(26, 59, 50, 0.04); border-bottom: 1px solid rgba(26, 59, 50, 0.04);">
+    <div class="container">
+      <span class="section-subtitle">Freshly Roasted</span>
+      <h2 class="section-title">Signature Coffee Blends</h2>
+      
+      <div class="blends-grid">
+        <!-- Blend 1 -->
+        <div class="blend-card">
+          <div class="blend-header">
+            <h3 class="blend-title">Solstice Bloom</h3>
+            <span class="blend-origin">Ethiopia Yirgacheffe</span>
+          </div>
+          <p class="blend-desc">A delicate light roast boasting bright floral aromatics, with distinct honey sweetness and a crisp lemon-tea finish.</p>
+          <div class="blend-notes">
+            <span class="blend-note-badge">Jasmine</span>
+            <span class="blend-note-badge">Bergamot</span>
+            <span class="blend-note-badge">Lemon Zest</span>
+          </div>
+        </div>
+
+        <!-- Blend 2 -->
+        <div class="blend-card">
+          <div class="blend-header">
+            <h3 class="blend-title">Andean Ember</h3>
+            <span class="blend-origin">Colombia Huila</span>
+          </div>
+          <p class="blend-desc">A rich medium roast showing exceptional sweetness. Highlighted by sweet caramel layers, roasted pecan, and red apple acidity.</p>
+          <div class="blend-notes">
+            <span class="blend-note-badge">Caramel</span>
+            <span class="blend-note-badge">Red Apple</span>
+            <span class="blend-note-badge">Toasted Pecan</span>
+          </div>
+        </div>
+
+        <!-- Blend 3 -->
+        <div class="blend-card">
+          <div class="blend-header">
+            <h3 class="blend-title">Blackwood Reserve</h3>
+            <span class="blend-origin">Sumatra Mandheling</span>
+          </div>
+          <p class="blend-desc">A bold, full-bodied dark roast. Intensely earthy and herbal with notes of dark baker's chocolate and a smooth, syrupy finish.</p>
+          <div class="blend-notes">
+            <span class="blend-note-badge">Dark Chocolate</span>
+            <span class="blend-note-badge">Cedar</span>
+            <span class="blend-note-badge">Molasses</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Brew Calculator -->
+  <section id="calc">
+    <div class="container">
+      <span class="section-subtitle">Interactive Guide</span>
+      <h2 class="section-title">Artisan Brew Calculator</h2>
+      
+      <div class="calculator-layout">
+        <!-- Calculator controls -->
+        <div class="calc-controls">
+          <div class="input-group">
+            <label for="brewMethod" class="input-label">1. Choose Brewing Method</label>
+            <select id="brewMethod" class="select-input">
+              <option value="v60">Hario V60 (Pour Over)</option>
+              <option value="frenchpress">French Press</option>
+              <option value="aeropress">AeroPress</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="waterVolume" class="input-label">2. Select Desired Yield</label>
+            <div class="range-wrapper">
+              <input type="range" id="waterVolume" class="range-slider" min="200" max="1000" step="50" value="300">
+              <span class="range-value" id="waterValue">300 ml</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculation results -->
+        <div class="calc-results">
+          <div>
+            <div class="result-row">
+              <span class="result-label">Recommended Grind:</span>
+              <span class="result-value" id="resGrind" style="font-size: 1.25rem;">Medium-Fine</span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Water Temperature:</span>
+              <span class="result-value" id="resTemp">93<span>°C</span></span>
+            </div>
+            <div class="result-row" style="border-bottom: none; padding-bottom: 0;">
+              <span class="result-label">Required Coffee:</span>
+              <span class="result-value" id="resCoffee" style="color: var(--color-gold); font-size: 2rem;">20.0<span>g</span></span>
+            </div>
+          </div>
+
+          <!-- Active Brewing Timer -->
+          <div class="timer-container">
+            <div class="timer-status" id="timerStatus">Ready to Brew</div>
+            <div class="timer-display" id="timerDisplay">00:00</div>
+            <button class="btn-timer" id="btnTimer">Start Brew Timer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section / Story -->
+  <section id="about" style="background-color: var(--color-sand); border-top: 1px solid rgba(26,59,50,0.05);">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <span class="section-subtitle">Our Heritage</span>
+      <h2 class="section-title">Roasting with Intention</h2>
+      <p style="font-size: 1.15rem; line-height: 1.8; color: var(--color-charcoal); margin-bottom: 2rem;">
+        Founded in Seattle's Capitol Hill in 2019, Elysian Roastery began with a simple belief: coffee roasting is both a rigorous science and a tactile art. We roast on a vintage, modified 15kg San Franciscan drum roaster, profiling each single-origin lot to bring out terroir-specific sweetness and clean acidity.
+      </p>
+      <p style="font-size: 1.05rem; line-height: 1.7; color: rgba(45, 42, 38, 0.8);">
+        We build long-term relationships with growers in Colombia, Ethiopia, and Sumatra, paying far above fair-trade minimums to support regenerative agriculture and forest conservation. Every cup represents a transparent connection between grower, roaster, and brewer.
+      </p>
+    </div>
+  </section>
+
+  <!-- Newsletter Signup -->
+  <section class="newsletter">
+    <div class="container">
+      <div id="newsletterContent">
+        <h2>Join Our Coffee Club</h2>
+        <p>Sign up to receive notifications for limited micro-lot releases, brewing workshops, and a 10% discount on your first order.</p>
+        <form class="newsletter-form" id="newsletterForm" novalidate>
+          <input type="email" id="newsEmail" class="newsletter-input" placeholder="Your email address" aria-label="Email address">
+          <button type="submit" class="btn-subscribe">Subscribe</button>
+          <div class="newsletter-error" id="newsError">Please enter a valid email address.</div>
+        </form>
+      </div>
+      
+      <!-- Subscription Success -->
+      <div class="newsletter-success" id="newsletterSuccess">
+        <h4>Welcome to the Club!</h4>
+        <p>Check your inbox for your 10% discount code and details on our upcoming single-origin harvests.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>elysian.roastery</h3>
+          <p>Artisanal organic coffees sourced sustainably, roasted small-batch, and served with intention in Seattle, WA.</p>
+        </div>
+        <div>
+          <ul class="footer-list">
+            <li class="footer-list-title">Explore</li>
+            <li><a href="#blends">Our Blends</a></li>
+            <li><a href="#calc">Brew Calculator</a></li>
+            <li><a href="#about">Our Story</a></li>
+          </ul>
+        </div>
+        <div>
+          <ul class="footer-list">
+            <li class="footer-list-title">Visit Us</li>
+            <li>1204 E Pike St</li>
+            <li>Seattle, WA 98122</li>
+            <li>Daily: 7am – 6pm</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div>&copy; 2026 Elysian Roastery. All rights reserved.</div>
+        <div style="font-style: italic;">Sip slowly, roast carefully.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Brew Ratio Calculations
+      const brewMethodSelect = document.getElementById('brewMethod');
+      const waterVolumeSlider = document.getElementById('waterVolume');
+      const waterValueSpan = document.getElementById('waterValue');
+      
+      const resGrind = document.getElementById('resGrind');
+      const resTemp = document.getElementById('resTemp');
+      const resCoffee = document.getElementById('resCoffee');
+
+      // Brew methods config
+      const methodsConfig = {
+        v60: {
+          ratio: 15,
+          grind: 'Medium-Fine',
+          temp: 93
+        },
+        frenchpress: {
+          ratio: 12,
+          grind: 'Coarse',
+          temp: 95
+        },
+        aeropress: {
+          ratio: 16,
+          grind: 'Medium',
+          temp: 90
+        }
+      };
+
+      const calculateBrew = () => {
+        const method = brewMethodSelect.value;
+        const waterVal = parseInt(waterVolumeSlider.value, 10);
+        
+        waterValueSpan.textContent = `${waterVal} ml`;
+
+        const config = methodsConfig[method];
+        if (config) {
+          resGrind.textContent = config.grind;
+          resTemp.innerHTML = `${config.temp}<span>°C</span>`;
+          
+          const coffeeGrams = (waterVal / config.ratio).toFixed(1);
+          resCoffee.innerHTML = `${coffeeGrams}<span>g</span>`;
+        }
+      };
+
+      // Event listeners
+      brewMethodSelect.addEventListener('change', () => {
+        calculateBrew();
+        resetTimer();
+      });
+      waterVolumeSlider.addEventListener('input', calculateBrew);
+
+      // Initial calculation run
+      calculateBrew();
+
+      // 2. Interactive Brew Timer
+      const btnTimer = document.getElementById('btnTimer');
+      const timerDisplay = document.getElementById('timerDisplay');
+      const timerStatus = document.getElementById('timerStatus');
+      
+      let timerInterval = null;
+      let timerSeconds = 0;
+      let isTimerRunning = false;
+
+      const formatTime = (totalSeconds) => {
+        const mins = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+        const secs = (totalSeconds % 60).toString().padStart(2, '0');
+        return `${mins}:${secs}`;
+      };
+
+      const updateTimerStatus = (seconds) => {
+        const method = brewMethodSelect.value;
+        if (method === 'v60') {
+          if (seconds === 0) return 'Pour Bloom Water (60g)';
+          if (seconds < 45) return 'Stage 1: Bloom (Let it swell)';
+          if (seconds < 105) return 'Stage 2: Second Pour (Slow circular stream)';
+          if (seconds < 165) return 'Stage 3: Final Drawdown (Keep surface level)';
+          return 'Brewing Complete! Enjoy your coffee.';
+        } else if (method === 'frenchpress') {
+          if (seconds < 60) return 'Pour all water & stir gently';
+          if (seconds < 240) return 'Steeping (Let flavor profiles develop)';
+          return 'Steeping complete. Press plunger slowly.';
+        } else { // AeroPress
+          if (seconds < 30) return 'Bloom stage (Stir 5 times)';
+          if (seconds < 90) return 'Steeping stage';
+          return 'Invert and plunge slowly (30s)';
+        }
+      };
+
+      const startTimer = () => {
+        isTimerRunning = true;
+        btnTimer.textContent = 'Pause Timer';
+        btnTimer.style.backgroundColor = '#2d2a26';
+        
+        timerInterval = setInterval(() => {
+          timerSeconds++;
+          timerDisplay.textContent = formatTime(timerSeconds);
+          timerStatus.textContent = updateTimerStatus(timerSeconds);
+        }, 1000);
+      };
+
+      const pauseTimer = () => {
+        isTimerRunning = false;
+        btnTimer.textContent = 'Resume Timer';
+        btnTimer.style.backgroundColor = 'var(--color-gold)';
+        clearInterval(timerInterval);
+      };
+
+      const resetTimer = () => {
+        isTimerRunning = false;
+        clearInterval(timerInterval);
+        timerSeconds = 0;
+        timerDisplay.textContent = '00:00';
+        timerStatus.textContent = 'Ready to Brew';
+        btnTimer.textContent = 'Start Brew Timer';
+        btnTimer.style.backgroundColor = 'var(--color-gold)';
+      };
+
+      btnTimer.addEventListener('click', () => {
+        if (isTimerRunning) {
+          pauseTimer();
+        } else {
+          startTimer();
+        }
+      });
+
+      // 3. Newsletter Validation
+      const newsForm = document.getElementById('newsletterForm');
+      const newsInput = document.getElementById('newsEmail');
+      const newsError = document.getElementById('newsError');
+      const newsContent = document.getElementById('newsletterContent');
+      const newsSuccess = document.getElementById('newsletterSuccess');
+
+      const isValidEmail = (email) => {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+      };
+
+      newsForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        newsError.style.display = 'none';
+
+        const emailVal = newsInput.value.trim();
+        if (!emailVal || !isValidEmail(emailVal)) {
+          newsError.style.display = 'block';
+        } else {
+          // Success state transition
+          newsContent.style.display = 'none';
+          newsSuccess.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

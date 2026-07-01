@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ApexFlow - The modern collaborative task management platform for scaling teams. Calculate your pricing, view customer testimonials, and start your free trial.">
+  <title>ApexFlow | Modern Collaborative Task Management Platform</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Design Tokens */
+    :root {
+      --bg-light: #f8fafc;
+      --bg-white: #ffffff;
+      --text-dark: #0f172a;
+      --text-slate: #475569;
+      --text-muted: #94a3b8;
+      
+      --color-primary: #2563eb;
+      --color-primary-hover: #1d4ed8;
+      --color-secondary: #7c3aed;
+      --color-accent-glow: rgba(37, 99, 235, 0.15);
+      
+      --font-headings: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-fast: all 0.15s ease;
+      --border-radius: 12px;
+      --border-radius-lg: 20px;
+      --box-shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+      --box-shadow-hover: 0 20px 40px -15px rgba(37, 99, 235, 0.1);
+      --border-color: rgba(226, 232, 240, 0.8);
+    }
+
+    /* Base Setup */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-slate);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(248, 250, 252, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+    }
+
+    .logo {
+      font-family: var(--font-headings);
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.04em;
+      text-decoration: none;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo span {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-slate);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--color-primary);
+    }
+
+    .btn-nav {
+      background-color: var(--color-primary);
+      color: var(--bg-white);
+      padding: 0.6rem 1.25rem;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-nav:hover {
+      background-color: var(--color-primary-hover);
+      box-shadow: 0 4px 12px var(--color-accent-glow);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 120px;
+      padding-bottom: 4rem;
+      background: radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.05) 0%, transparent 50%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-family: var(--font-headings);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--text-dark);
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-text h1 span {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-slate);
+      margin-bottom: 2.5rem;
+      max-width: 520px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: var(--bg-white);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+    }
+
+    .btn-secondary {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      color: var(--text-dark);
+      padding: 1rem 2rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-light);
+      border-color: var(--text-slate);
+      transform: translateY(-2px);
+    }
+
+    /* Mockup Dashboard Visual */
+    .dashboard-mockup {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-lg);
+      box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+      aspect-ratio: 1.4;
+      display: flex;
+    }
+
+    .sidebar-mock {
+      width: 60px;
+      background: #0f172a;
+      padding: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .sidebar-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .sidebar-dot.active {
+      background: var(--color-primary);
+    }
+
+    .content-mock {
+      flex: 1;
+      background: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar-mock {
+      height: 50px;
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      padding: 0 1.5rem;
+      justify-content: space-between;
+    }
+
+    .topbar-search {
+      width: 140px;
+      height: 24px;
+      border-radius: 6px;
+      background: #f1f5f9;
+    }
+
+    .topbar-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--color-secondary);
+    }
+
+    .board-mock {
+      flex: 1;
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .column-mock {
+      background: var(--bg-white);
+      border-radius: 10px;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .column-header {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .card-mock {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: var(--transition-smooth);
+    }
+
+    .project-card:hover .card-mock {
+      transform: translateY(-2px);
+      border-color: var(--color-primary);
+    }
+
+    .card-line {
+      height: 6px;
+      border-radius: 3px;
+      background: #e2e8f0;
+    }
+    .card-line-sm {
+      width: 50%;
+    }
+    .card-line-md {
+      width: 75%;
+    }
+
+    .card-tag-mock {
+      width: 32px;
+      height: 12px;
+      border-radius: 10px;
+      background: rgba(37, 99, 235, 0.1);
+    }
+
+    /* Sections */
+    section {
+      padding: 100px 0;
+    }
+
+    .section-title-wrapper {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-subtitle {
+      color: var(--color-primary);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-headings);
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      color: var(--text-dark);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      padding: 2.5rem;
+      border-radius: var(--border-radius-lg);
+      box-shadow: var(--box-shadow-soft);
+      transition: var(--transition-smooth);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--box-shadow-hover);
+      border-color: rgba(37, 99, 235, 0.1);
+    }
+
+    .feature-icon-box {
+      width: 48px;
+      height: 48px;
+      background: rgba(37, 99, 235, 0.05);
+      color: var(--color-primary);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-card:hover .feature-icon-box {
+      background: var(--color-primary);
+      color: var(--bg-white);
+      box-shadow: 0 4px 10px var(--color-accent-glow);
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-headings);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--text-slate);
+    }
+
+    /* Interactive Pricing Section */
+    .pricing-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-lg);
+      box-shadow: var(--box-shadow-soft);
+      padding: 4rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+    }
+
+    .pricing-calc {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .toggle-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    /* Switch styling */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 26px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider-toggle {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #cbd5e1;
+      transition: .3s;
+      border-radius: 34px;
+    }
+
+    .slider-toggle:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider-toggle {
+      background-color: var(--color-primary);
+    }
+
+    input:checked + .slider-toggle:before {
+      transform: translateX(22px);
+    }
+
+    .discount-badge {
+      background: rgba(124, 58, 237, 0.1);
+      color: var(--color-secondary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.5rem;
+      border-radius: 20px;
+    }
+
+    .range-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .range-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .range-slider {
+      width: 100%;
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: #cbd5e1;
+      outline: none;
+    }
+
+    .range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: var(--transition-fast);
+    }
+
+    .range-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      background: var(--color-secondary);
+    }
+
+    .seats-count {
+      font-family: var(--font-headings);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    /* Pricing Display Card */
+    .pricing-display {
+      background: var(--bg-light);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .tier-badge {
+      align-self: flex-start;
+      background: var(--color-primary);
+      color: var(--bg-white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 0.75rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+
+    .price-value-box {
+      margin-bottom: 2rem;
+    }
+
+    .price-number {
+      font-family: var(--font-headings);
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1;
+    }
+
+    .price-period {
+      font-size: 0.95rem;
+      color: var(--text-slate);
+    }
+
+    .price-detail {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .pricing-features-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-slate);
+      transition: var(--transition-fast);
+    }
+
+    .pricing-feature-item.locked {
+      color: var(--text-muted);
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+
+    .pricing-feature-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--color-primary);
+    }
+
+    .pricing-feature-item.locked svg {
+      color: var(--text-muted);
+    }
+
+    .btn-pricing-cta {
+      display: block;
+      width: 100%;
+      background: var(--text-dark);
+      color: var(--bg-white);
+      text-align: center;
+      text-decoration: none;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-pricing-cta:hover {
+      background: var(--color-primary);
+      box-shadow: 0 4px 15px var(--color-accent-glow);
+    }
+
+    /* Testimonials Carousel */
+    .carousel-container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      padding: 2rem 0;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      padding: 0 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .testimonial-quote {
+      font-family: var(--font-headings);
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.4;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .testimonial-author {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .author-avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      color: var(--bg-white);
+      font-weight: 700;
+      font-size: 1.25rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .author-name {
+      font-weight: 700;
+      color: var(--text-dark);
+      font-size: 1rem;
+    }
+
+    .author-title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .btn-carousel {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      background: var(--bg-white);
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-carousel:hover {
+      background: var(--color-primary);
+      color: var(--bg-white);
+      border-color: var(--color-primary);
+      box-shadow: 0 4px 10px var(--color-accent-glow);
+    }
+
+    /* FAQ Accordion */
+    .faq-wrapper {
+      max-width: 750px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .faq-item {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+
+    .faq-header {
+      width: 100%;
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      font-family: var(--font-headings);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .faq-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--color-primary);
+      transition: transform var(--transition-smooth);
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s ease;
+      padding: 0 1.5rem;
+      color: var(--text-slate);
+      font-size: 0.95rem;
+    }
+
+    .faq-item.active .faq-body {
+      max-height: 200px; /* arbitrary height to slide down */
+      padding-bottom: 1.5rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 5rem 0 3rem 0;
+      background: var(--bg-white);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+    }
+
+    .footer-brand h3 {
+      font-family: var(--font-headings);
+      color: var(--text-dark);
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand p {
+      max-width: 320px;
+      font-size: 0.9rem;
+    }
+
+    .footer-list {
+      list-style: none;
+    }
+
+    .footer-list-title {
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dark);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-list li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-list a {
+      color: var(--text-slate);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: var(--transition-smooth);
+    }
+
+    .footer-list a:hover {
+      color: var(--color-primary);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-color);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsiveness */
+    @media (max-width: 968px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        text-align: center;
+      }
+      
+      .hero-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .pricing-wrapper {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 2.5rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none; /* simple hidden for test, can add burger toggle if needed, or keep compact */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#" class="logo">apex<span>.flow</span></a>
+      <ul class="nav-menu">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#pricing" class="nav-link">Pricing</a></li>
+        <li><a href="#testimonials" class="nav-link">Customers</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="#pricing" class="btn-nav">Start Trial</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <h1>Organize tasks. Accelerate <span>momentum</span>.</h1>
+        <p class="hero-desc">
+          ApexFlow brings your projects, timelines, and team conversations into a single, lightning-fast collaborative command center.
+        </p>
+        <div class="hero-actions">
+          <a href="#pricing" class="btn-primary">Try Free for 14 Days</a>
+          <a href="#features" class="btn-secondary">Explore Features</a>
+        </div>
+      </div>
+      
+      <div class="dashboard-mockup">
+        <div class="sidebar-mock">
+          <div class="sidebar-dot active"></div>
+          <div class="sidebar-dot"></div>
+          <div class="sidebar-dot"></div>
+        </div>
+        <div class="content-mock">
+          <div class="topbar-mock">
+            <div class="topbar-search"></div>
+            <div class="topbar-avatar"></div>
+          </div>
+          <div class="board-mock">
+            <!-- Col 1 -->
+            <div class="column-mock">
+              <div class="column-header">
+                <span>Backlog</span>
+                <span style="color: var(--text-muted)">3</span>
+              </div>
+              <div class="card-mock">
+                <div class="card-tag-mock"></div>
+                <div class="card-line card-line-md"></div>
+                <div class="card-line card-line-sm"></div>
+              </div>
+              <div class="card-mock">
+                <div class="card-tag-mock" style="background: rgba(124, 58, 237, 0.1);"></div>
+                <div class="card-line card-line-md"></div>
+              </div>
+            </div>
+            <!-- Col 2 -->
+            <div class="column-mock">
+              <div class="column-header">
+                <span>In Progress</span>
+                <span style="color: var(--color-primary)">1</span>
+              </div>
+              <div class="card-mock" style="border-color: var(--color-primary);">
+                <div class="card-tag-mock"></div>
+                <div class="card-line card-line-md"></div>
+                <div class="card-line card-line-md"></div>
+              </div>
+            </div>
+            <!-- Col 3 -->
+            <div class="column-mock">
+              <div class="column-header">
+                <span>Done</span>
+                <span style="color: #22c55e">2</span>
+              </div>
+              <div class="card-mock">
+                <div class="card-line card-line-md" style="text-decoration: line-through; opacity: 0.5;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid Section -->
+  <section id="features" style="background: var(--bg-white); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="section-title-wrapper">
+        <span class="section-subtitle">Core Platform</span>
+        <h2 class="section-title">Built for High-Growth Teams</h2>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24" height="24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3>Timeline & Gantt Views</h3>
+          <p>Visualize critical paths and project dependencies with drag-and-drop timeline modules that sync instantly across all team workspaces.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24" height="24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"></path>
+            </svg>
+          </div>
+          <h3>Advanced Velocity Reports</h3>
+          <p>Understand delivery blockades before they happen with automated velocity charts, sprint burn-downs, and customizable team reports.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="24" height="24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+          </div>
+          <h3>Contextual Discussions</h3>
+          <p>Keep conversations tied directly to task profiles. Reduce notification fatigue by centralizing updates directly on the board cards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Pricing Section -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-title-wrapper">
+        <span class="section-subtitle">Predictable Pricing</span>
+        <h2 class="section-title">Scale Gracefully with Your Team</h2>
+      </div>
+
+      <div class="pricing-wrapper">
+        <!-- Interactive Controls -->
+        <div class="pricing-calc">
+          <div class="toggle-container">
+            <span class="toggle-label" style="opacity: 0.7;">Monthly Billing</span>
+            <label class="switch">
+              <input type="checkbox" id="billingToggle">
+              <span class="slider-toggle"></span>
+            </label>
+            <span class="toggle-label">Annual Billing</span>
+            <span class="discount-badge">Save 20%</span>
+          </div>
+
+          <div class="range-group">
+            <div class="range-header">
+              <span class="input-label">Number of Active Seats</span>
+              <span class="seats-count" id="seatsLabel">15 seats</span>
+            </div>
+            <input type="range" id="seatsSlider" class="range-slider" min="1" max="100" value="15">
+          </div>
+        </div>
+
+        <!-- Price Display Card -->
+        <div class="pricing-display">
+          <span class="tier-badge" id="tierBadge">Growth Tier</span>
+          
+          <div class="price-value-box">
+            <div class="price-number" id="priceDisplay">$105</div>
+            <div class="price-period" id="pricePeriod">per month</div>
+            <div class="price-detail" id="priceDetail">$7 / user / month</div>
+          </div>
+
+          <ul class="pricing-features-list">
+            <li class="pricing-feature-item" id="featCore">
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Unlimited Tasks & Boards</span>
+            </li>
+            <li class="pricing-feature-item" id="featAnalytics">
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Custom Velocity Reports</span>
+            </li>
+            <li class="pricing-feature-item locked" id="featSSO">
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>SAML Single Sign-On (SSO)</span>
+            </li>
+          </ul>
+
+          <a href="#" class="btn-pricing-cta">Get Started Free</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Carousel -->
+  <section id="testimonials" style="background: rgba(37, 99, 235, 0.02); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="section-title-wrapper">
+        <span class="section-subtitle">Social Proof</span>
+        <h2 class="section-title">Trusted by Modern Product Teams</h2>
+      </div>
+
+      <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- Slide 1 -->
+          <div class="carousel-slide">
+            <div class="testimonial-quote">
+              "ApexFlow helped our design agency consolidate three separate tracking tools. Our velocity has increased by 30%, and timeline estimates are finally accurate."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar" style="background-color: var(--color-primary);">M</div>
+              <div class="author-name">Marcus Chen</div>
+              <div class="author-title">CTO, Neon Studio Group</div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="carousel-slide">
+            <div class="testimonial-quote">
+              "The velocity reports alone are worth the price. Being able to visualize blockades before they stall sprint delivery has saved our development pipelines."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar" style="background-color: var(--color-secondary);">E</div>
+              <div class="author-name">Elena Rostova</div>
+              <div class="author-title">Product Lead, Finly Tech</div>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="carousel-slide">
+            <div class="testimonial-quote">
+              "As a remote company, asynchronous clarity is our lifeblood. ApexFlow keeps discussions right inside card profiles, letting us cut down on standups."
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar" style="background-color: #f59e0b;">J</div>
+              <div class="author-name">James Bradley</div>
+              <div class="author-title">Founder, RemoteStack</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="btn-carousel" id="btnPrev" aria-label="Previous Slide">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20" height="20">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button class="btn-carousel" id="btnNext" aria-label="Next Slide">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20" height="20">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-title-wrapper">
+        <span class="section-subtitle">Common Questions</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-wrapper">
+        <!-- FAQ 1 -->
+        <div class="faq-item">
+          <button class="faq-header">
+            <span>Can I change my seat count after starting?</span>
+            <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="faq-body">
+            Yes. You can add or remove team seats at any point during your billing period. Adjustments are instantly calculated and will be prorated on your next invoice.
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <button class="faq-header">
+            <span>What features are included in the 14-day free trial?</span>
+            <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="faq-body">
+            You get full access to all features (including custom sprint metrics and SSO) for up to 30 seats during the trial. No credit card is required to begin.
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <button class="faq-header">
+            <span>How secure is our project database?</span>
+            <svg class="faq-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="faq-body">
+            ApexFlow uses SOC2-compliant databases with full AES-256 encryption at rest and TLS 1.3 encryption in transit. Daily automated backups are stored securely across multiple availability zones.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>apex.flow</h3>
+          <p>The speed-first project coordination platform designed for the workflow velocity of modern technology teams.</p>
+        </div>
+        <div>
+          <ul class="footer-list">
+            <li class="footer-list-title">Product</li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <ul class="footer-list">
+            <li class="footer-list-title">Company</li>
+            <li><a href="#testimonials">Customers</a></li>
+            <li><a href="#">Security</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div>&copy; 2026 ApexFlow Inc. All rights reserved.</div>
+        <div>Built for collaborative velocity.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Pricing Calculator
+      const seatsSlider = document.getElementById('seatsSlider');
+      const seatsLabel = document.getElementById('seatsLabel');
+      const billingToggle = document.getElementById('billingToggle');
+      
+      const priceDisplay = document.getElementById('priceDisplay');
+      const pricePeriod = document.getElementById('pricePeriod');
+      const priceDetail = document.getElementById('priceDetail');
+      const tierBadge = document.getElementById('tierBadge');
+      
+      const featAnalytics = document.getElementById('featAnalytics');
+      const featSSO = document.getElementById('featSSO');
+
+      const updatePricing = () => {
+        const seats = parseInt(seatsSlider.value, 10);
+        const isAnnual = billingToggle.checked;
+        
+        seatsLabel.textContent = `${seats} seat${seats > 1 ? 's' : ''}`;
+
+        // Tier pricing details
+        let baseCostPerSeat = 9;
+        let tierName = 'Starter Tier';
+
+        if (seats >= 15 && seats < 50) {
+          baseCostPerSeat = 7;
+          tierName = 'Growth Tier';
+        } else if (seats >= 50) {
+          baseCostPerSeat = 5;
+          tierName = 'Enterprise Tier';
+        }
+
+        // Apply discount for annual
+        const discountFactor = isAnnual ? 0.8 : 1.0;
+        const finalCostPerSeat = baseCostPerSeat * discountFactor;
+        const totalMonthlyBill = Math.round(seats * finalCostPerSeat);
+
+        // Update displays
+        tierBadge.textContent = tierName;
+        
+        if (isAnnual) {
+          priceDisplay.textContent = `$${totalMonthlyBill}`;
+          pricePeriod.textContent = 'billed monthly (annually committed)';
+          priceDetail.textContent = `$${finalCostPerSeat.toFixed(2)} / seat / month (20% discount applied)`;
+        } else {
+          priceDisplay.textContent = `$${totalMonthlyBill}`;
+          pricePeriod.textContent = 'per month';
+          priceDetail.textContent = `$${baseCostPerSeat} / seat / month`;
+        }
+
+        // Lock / Unlock Features dynamically based on seats
+        if (seats < 15) {
+          tierBadge.style.background = 'var(--color-primary)';
+          featAnalytics.classList.add('locked');
+          featSSO.classList.add('locked');
+        } else if (seats >= 15 && seats < 50) {
+          tierBadge.style.background = 'var(--color-secondary)';
+          featAnalytics.classList.remove('locked');
+          featSSO.classList.add('locked');
+        } else {
+          tierBadge.style.background = '#f59e0b'; // Gold
+          featAnalytics.classList.remove('locked');
+          featSSO.classList.remove('locked');
+        }
+      };
+
+      seatsSlider.addEventListener('input', updatePricing);
+      billingToggle.addEventListener('change', updatePricing);
+      
+      // Initialize pricing
+      updatePricing();
+
+      // 2. Testimonials Carousel
+      const track = document.getElementById('carouselTrack');
+      const slides = document.querySelectorAll('.carousel-slide');
+      const btnNext = document.getElementById('btnNext');
+      const btnPrev = document.getElementById('btnPrev');
+
+      let currentIndex = 0;
+
+      const updateCarousel = (index) => {
+        track.style.transform = `translateX(-${index * 100}%)`;
+      };
+
+      btnNext.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateCarousel(currentIndex);
+      });
+
+      btnPrev.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateCarousel(currentIndex);
+      });
+
+      // 3. FAQ Accordion
+      const faqHeaders = document.querySelectorAll('.faq-header');
+
+      faqHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+          const faqItem = header.parentElement;
+          const isActive = faqItem.classList.contains('active');
+
+          // Close all active items
+          document.querySelectorAll('.faq-item').forEach(item => {
+            item.classList.remove('active');
+          });
+
+          // Toggle current
+          if (!isActive) {
+            faqItem.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

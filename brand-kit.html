@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pop AI Brand Kit</title>
+  
+  <!-- Google Fonts Connection -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* -------------------------------------------------------------
+       CORE DESIGN SYSTEM & CUSTOM VARIABLES
+       ------------------------------------------------------------- */
+    :root {
+      /* Colors */
+      --color-primary-accent: #0CC481;    /* Mint Glow */
+      --color-secondary-accent: #0F1C16;  /* Forest Deep */
+      --color-background-primary: #050808;/* Obsidian Black */
+      --color-background-card: #111413;   /* Charcoal Dark */
+      --color-text-primary: #EDECE4;      /* Warm Cream */
+      --color-text-muted: #8E9592;        /* Sage Gray */
+      --color-border: #222624;            /* Slate Olive */
+      
+      /* Fonts */
+      --font-headings: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      
+      /* Transitions */
+      --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Reset & Base Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--color-background-primary);
+      color: var(--color-text-primary);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--color-background-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-border);
+      border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-primary-accent);
+    }
+
+    /* Selection Highlight */
+    ::selection {
+      background-color: var(--color-primary-accent);
+      color: var(--color-background-primary);
+    }
+
+    /* Typography Utilities */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-headings);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(135deg, #FFFFFF 30%, var(--color-primary-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--font-headings);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 6px 12px;
+      border-radius: 100px;
+      border: 1px solid var(--color-border);
+      background-color: rgba(17, 20, 19, 0.5);
+      color: var(--color-primary-accent);
+      margin-bottom: 20px;
+    }
+
+    /* -------------------------------------------------------------
+       LAYOUT UTILITIES
+       ------------------------------------------------------------- */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 100px 0 60px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .section-title-wrap {
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background-color: var(--color-primary-accent);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--color-primary-accent);
+    }
+
+    .section-subtitle {
+      color: var(--color-text-muted);
+      font-size: 1rem;
+      font-weight: 400;
+      max-width: 600px;
+    }
+
+    .card {
+      background-color: var(--color-background-card);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      border-color: rgba(12, 196, 129, 0.25);
+      box-shadow: 0 0 30px rgba(12, 196, 129, 0.05);
+    }
+
+    /* -------------------------------------------------------------
+       NAVIGATION
+       ------------------------------------------------------------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(5, 8, 8, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 20px 0;
+      transition: var(--transition-smooth);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--color-primary-accent) 0%, var(--color-secondary-accent) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-headings);
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--color-background-primary);
+      box-shadow: 0 0 15px rgba(12, 196, 129, 0.4);
+    }
+
+    .nav-logo-text {
+      font-family: var(--font-headings);
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--color-text-muted);
+      font-family: var(--font-headings);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: var(--transition-smooth);
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary-accent);
+    }
+
+    /* -------------------------------------------------------------
+       HERO SECTION
+       ------------------------------------------------------------- */
+    .hero-section {
+      position: relative;
+      padding: 120px 0 80px 0;
+      overflow: hidden;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    /* Background glow effect */
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(12, 196, 129, 0.08) 0%, rgba(5, 8, 8, 0) 70%);
+      top: -200px;
+      right: -100px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      font-weight: 800;
+    }
+
+    .hero-description {
+      color: var(--color-text-primary);
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      font-weight: 400;
+      opacity: 0.95;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: var(--color-primary-accent);
+      color: var(--color-background-primary);
+      text-decoration: none;
+      font-family: var(--font-headings);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 16px 32px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(12, 196, 129, 0.25);
+      transition: var(--transition-smooth);
+      border: 1px solid transparent;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(12, 196, 129, 0.4);
+      background-color: #FFFFFF;
+    }
+
+    .cta-button svg {
+      transition: var(--transition-smooth);
+    }
+
+    .cta-button:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Hero Branding Card Mockup */
+    .hero-branding-mockup {
+      width: 100%;
+      height: 380px;
+      border-radius: 20px;
+      border: 1px dashed var(--color-border);
+      background: radial-gradient(circle at center, rgba(17, 20, 19, 0.8) 0%, rgba(5, 8, 8, 0.9) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero-branding-mockup::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 1.5px;
+      background: linear-gradient(135deg, rgba(12, 196, 129, 0.3) 0%, rgba(17, 20, 19, 0.05) 50%, rgba(12, 196, 129, 0.1) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .mockup-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+      animation: pulseGlow 6s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(12, 196, 129, 0.1)); }
+      50% { transform: scale(1.02); filter: drop-shadow(0 0 25px rgba(12, 196, 129, 0.25)); }
+    }
+
+    .mockup-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--color-primary-accent) 0%, var(--color-secondary-accent) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-headings);
+      font-weight: 800;
+      font-size: 2.5rem;
+      color: var(--color-background-primary);
+    }
+
+    .mockup-title {
+      font-family: var(--font-headings);
+      font-size: 2.2rem;
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+
+    .mockup-vibe {
+      font-family: var(--font-headings);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-primary-accent);
+      margin-top: 5px;
+    }
+
+    /* -------------------------------------------------------------
+       LOGO & TYPOGRAPHY SECTION
+       ------------------------------------------------------------- */
+    .logo-typo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .logo-spec-list {
+      list-style: none;
+      margin-top: 24px;
+    }
+
+    .logo-spec-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(34, 38, 36, 0.5);
+    }
+
+    .logo-spec-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .logo-spec-icon {
+      color: var(--color-primary-accent);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .logo-spec-title {
+      font-family: var(--font-headings);
+      font-size: 1rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+
+    .logo-spec-desc {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Font Specs Box */
+    .font-spec-card {
+      margin-bottom: 20px;
+      padding: 24px;
+      background-color: rgba(5, 8, 8, 0.4);
+      border-radius: 12px;
+      border: 1px solid var(--color-border);
+    }
+
+    .font-spec-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .font-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .font-name-large {
+      font-family: var(--font-headings);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .font-preview-text {
+      border-left: 2px solid var(--color-primary-accent);
+      padding-left: 16px;
+      margin-top: 10px;
+    }
+
+    .font-h1-sample {
+      font-family: var(--font-headings);
+      font-size: 2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.2;
+    }
+
+    .font-body-sample {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--color-text-primary);
+      margin-top: 8px;
+    }
+
+    /* -------------------------------------------------------------
+       COLOR PALETTE SECTION
+       ------------------------------------------------------------- */
+    .colors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .color-card {
+      background-color: var(--color-background-card);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 20px;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .color-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .swatch-display {
+      width: 100%;
+      height: 150px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .color-card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .color-name {
+      font-family: var(--font-headings);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+
+    .color-role {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .color-hex-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      background-color: rgba(5, 8, 8, 0.5);
+      border-radius: 6px;
+      padding: 8px 12px;
+      border: 1px solid var(--color-border);
+    }
+
+    .color-hex-code {
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: var(--color-text-primary);
+    }
+
+    .copy-btn {
+      background: none;
+      border: none;
+      color: var(--color-primary-accent);
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: var(--font-headings);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: var(--transition-smooth);
+    }
+
+    .copy-btn:hover {
+      background-color: rgba(12, 196, 129, 0.1);
+    }
+
+    /* -------------------------------------------------------------
+       TONE & VOICE SECTION
+       ------------------------------------------------------------- */
+    .tone-voice-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 32px;
+    }
+
+    .vibe-showcase {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(135deg, var(--color-background-card) 0%, rgba(15, 28, 22, 0.3) 100%);
+    }
+
+    .vibe-quote {
+      font-family: var(--font-headings);
+      font-size: 1.5rem;
+      line-height: 1.4;
+      font-style: italic;
+      color: #FFFFFF;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .vibe-quote::before {
+      content: '"';
+      font-size: 5rem;
+      color: rgba(12, 196, 129, 0.1);
+      position: absolute;
+      left: -20px;
+      top: -30px;
+      font-family: serif;
+    }
+
+    .characteristics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .char-card {
+      background-color: rgba(5, 8, 8, 0.3);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: var(--transition-smooth);
+    }
+
+    .char-title {
+      font-family: var(--font-headings);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-primary-accent);
+      margin-bottom: 8px;
+    }
+
+    .char-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-bottom: 16px;
+    }
+
+    .char-rules {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.8rem;
+    }
+
+    .char-rule {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .char-rule-tag {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .char-rule-tag.do {
+      background-color: rgba(12, 196, 129, 0.1);
+      color: var(--color-primary-accent);
+      border: 1px solid rgba(12, 196, 129, 0.2);
+    }
+
+    .char-rule-tag.dont {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: #EF4444;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .char-rule-text {
+      color: var(--color-text-primary);
+    }
+
+    /* -------------------------------------------------------------
+       CORE VALUES SECTION
+       ------------------------------------------------------------- */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .value-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 250px;
+    }
+
+    .value-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .value-num {
+      font-family: var(--font-headings);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--color-primary-accent);
+      opacity: 0.3;
+    }
+
+    .value-title {
+      font-family: var(--font-headings);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-top: 10px;
+    }
+
+    .value-desc {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* -------------------------------------------------------------
+       BRAND GUIDELINES SUMMARY SECTION
+       ------------------------------------------------------------- */
+    .rules-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 40px;
+    }
+
+    .guideline-item {
+      margin-bottom: 32px;
+    }
+
+    .guideline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .guideline-title {
+      font-family: var(--font-headings);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .guideline-bullet {
+      width: 6px;
+      height: 6px;
+      background-color: var(--color-primary-accent);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .guideline-list {
+      list-style: none;
+      padding-left: 14px;
+    }
+
+    .guideline-list-item {
+      position: relative;
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      padding-left: 15px;
+    }
+
+    .guideline-list-item::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--color-primary-accent);
+    }
+
+    /* -------------------------------------------------------------
+       CLIPBOARD TOAST NOTIFICATION
+       ------------------------------------------------------------- */
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: var(--color-background-card);
+      color: var(--color-primary-accent);
+      border: 1px solid var(--color-primary-accent);
+      box-shadow: 0 4px 30px rgba(12, 196, 129, 0.2);
+      text-align: center;
+      border-radius: 8px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1000;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      font-family: var(--font-headings);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: visibility 0s, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* -------------------------------------------------------------
+       RESPONSIVE DESIGN (MEDIA QUERIES)
+       ------------------------------------------------------------- */
+    @media (max-width: 991px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+      
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .logo-typo-grid, .tone-voice-grid, .rules-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .vibe-showcase {
+        min-height: 200px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .section {
+        padding: 60px 0 40px 0;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .characteristics-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .nav-links {
+        display: none; /* simple mobile stack fallback */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast">Hex Code Copied!</div>
+
+  <!-- STICKY HEADER -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">P</div>
+        <div class="nav-logo-text">Pop AI</div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#hero">Intro</a></li>
+        <li><a href="#logo-typo">Logo & Typography</a></li>
+        <li><a href="#colors">Colors</a></li>
+        <li><a href="#tone">Tone</a></li>
+        <li><a href="#values">Values</a></li>
+        <li><a href="#rules">Guidelines</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO & INTRO SECTION -->
+  <section id="hero" class="hero-section">
+    <div class="hero-glow"></div>
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="badge">Brand Kit & Identity Spec</span>
+        <h1 class="hero-title gradient-text">We build for those who lead.</h1>
+        <p class="hero-description">
+          Pop AI is an elite AI strategy and engineering studio that builds and deploys high-performance intelligent systems for forward-thinking enterprises. We don't deal in conceptual slide decks or fragile prototypes—we design, develop, and integrate custom production-grade software that solves actual operational bottlenecks. By combining state-of-the-art engineering with radical pragmatism, we identify high-value opportunities, execute with extreme design and technical craftsmanship, and train your team to guarantee long-term adoption. Stop paying to experiment with AI. Start paying for results that move the needle.
+        </p>
+        <a href="#logo-typo" class="cta-button">
+          Explore System Guidelines
+          <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 1L11 5L7 9M11 5H1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="hero-branding-mockup">
+        <div class="mockup-logo">
+          <div class="mockup-icon">P</div>
+          <div class="mockup-title">Pop AI</div>
+          <div class="mockup-vibe">Production Over Prototypes</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO & TYPOGRAPHY SECTION -->
+  <section id="logo-typo" class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Logo & Typography</h2>
+        <p class="section-subtitle">Visual geometry and letterforms built for precise, tech-forward presentation.</p>
+      </div>
+      
+      <div class="logo-typo-grid">
+        <!-- Logo direction specifications -->
+        <div class="card">
+          <h3 style="font-size: 1.5rem; color: #FFFFFF; margin-bottom: 20px;">Logo Direction</h3>
+          <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 24px;">
+            The visual signature of Pop AI balances severe structural minimalism with an organic, clean digital energy.
+          </p>
+          
+          <ul class="logo-spec-list">
+            <li class="logo-spec-item">
+              <div class="logo-spec-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>
+              </div>
+              <div>
+                <h4 class="logo-spec-title">Abstract Geometric Symbol</h4>
+                <p class="logo-spec-desc">Combining a stylized letter "P" inside a circular container, merged with a subtle neon spark motif to indicate rapid, clean activation.</p>
+              </div>
+            </li>
+            
+            <li class="logo-spec-item">
+              <div class="logo-spec-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"></path></svg>
+              </div>
+              <div>
+                <h4 class="logo-spec-title">Custom Wordmark Typography</h4>
+                <p class="logo-spec-desc">Set in customized heavy letters with sharp angular cuts (especially on the "P" and "A" characters) representing engineering precision.</p>
+              </div>
+            </li>
+
+            <li class="logo-spec-item">
+              <div class="logo-spec-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg>
+              </div>
+              <div>
+                <h4 class="logo-spec-title">Horizontal High-Contrast Lockup</h4>
+                <p class="logo-spec-desc">A strict layout placing the glowing mint green icon on the left and high-contrast white text on the right, ensuring immediate clarity.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Typography specifications -->
+        <div class="card">
+          <h3 style="font-size: 1.5rem; color: #FFFFFF; margin-bottom: 24px;">Typeface Pairing</h3>
+          
+          <!-- Heading font card -->
+          <div class="font-spec-card">
+            <div class="font-title-row">
+              <div class="font-name-large">Outfit</div>
+              <span class="badge" style="margin-bottom: 0;">Primary / Headings</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 12px;">Weights used: Bold (700), Semi-Bold (600)</p>
+            <div class="font-preview-text">
+              <div class="font-h1-sample">Aa Bb Cc Dd Ee Ff</div>
+              <div class="font-h1-sample" style="font-size: 1.25rem; font-weight: 600; margin-top: 10px; color: var(--color-primary-accent);">
+                THE FUTURE IS SHIPPED. NOT BRIEFED.
+              </div>
+            </div>
+          </div>
+          
+          <!-- Body font card -->
+          <div class="font-spec-card">
+            <div class="font-title-row">
+              <div class="font-name-large">Inter</div>
+              <span class="badge" style="margin-bottom: 0; color: #EDECE4; border-color: rgba(237,236,228,0.2);">Secondary / Body</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 12px;">Weights used: Regular (400), Medium (500)</p>
+            <div class="font-preview-text">
+              <div class="font-body-sample" style="font-size: 1.1rem; font-weight: 500;">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj</div>
+              <div class="font-body-sample">
+                We implement clean, functional layouts using Inter for long-form documents. This guarantees high readability, comfortable spacing, and seamless rendering on high-resolution displays.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLOR PALETTE SECTION -->
+  <section id="colors" class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Color Palette</h2>
+        <p class="section-subtitle">A meticulously structured organic-tech spectrum, blending dark obsidian canvases with electric mint glows.</p>
+      </div>
+      
+      <div class="colors-grid">
+        
+        <!-- Color 1: Primary Accent -->
+        <div class="color-card">
+          <div class="swatch-display" style="background-color: #0CC481; box-shadow: 0 0 20px rgba(12, 196, 129, 0.3);"></div>
+          <div class="color-card-info">
+            <div class="color-name">Mint Glow</div>
+            <div class="color-role">Primary Accent / Highlight</div>
+            <div class="color-hex-row">
+              <span class="color-hex-code">#0CC481</span>
+              <button class="copy-btn" onclick="copyHex('#0CC481')">Copy</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Color 2: Secondary Accent -->
+        <div class="color-card">
+          <div class="swatch-display" style="background-color: #0F1C16;"></div>
+          <div class="color-card-info">
+            <div class="color-name">Forest Deep</div>
+            <div class="color-role">Secondary Accent / Glows</div>
+            <div class="color-hex-row">
+              <span class="color-hex-code">#0F1C16</span>
+              <button class="copy-btn" onclick="copyHex('#0F1C16')">Copy</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Color 3: Primary Background -->
+        <div class="color-card">
+          <div class="swatch-display" style="background-color: #050808;"></div>
+          <div class="color-card-info">
+            <div class="color-name">Obsidian Black</div>
+            <div class="color-role">Primary Background</div>
+            <div class="color-hex-row">
+              <span class="color-hex-code">#050808</span>
+              <button class="copy-btn" onclick="copyHex('#050808')">Copy</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Color 4: Secondary Background -->
+        <div class="color-card">
+          <div class="swatch-display" style="background-color: #111413;"></div>
+          <div class="color-card-info">
+            <div class="color-name">Charcoal Dark</div>
+            <div class="color-role">Secondary Background / Cards</div>
+            <div class="color-hex-row">
+              <span class="color-hex-code">#111413</span>
+              <button class="copy-btn" onclick="copyHex('#111413')">Copy</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Color 5: Primary Text -->
+        <div class="color-card">
+          <div class="swatch-display" style="background-color: #EDECE4;"></div>
+          <div class="color-card-info">
+            <div class="color-name">Warm Cream</div>
+            <div class="color-role">Primary Text</div>
+            <div class="color-hex-row">
+              <span class="color-hex-code">#EDECE4</span>
+              <button class="copy-btn" onclick="copyHex('#EDECE4')">Copy</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Color 6: Muted Text -->
+        <div class="color-card">
+          <div class="swatch-display" style="background-color: #8E9592;"></div>
+          <div class="color-card-info">
+            <div class="color-name">Sage Gray</div>
+            <div class="color-role">Secondary Muted Text</div>
+            <div class="color-hex-row">
+              <span class="color-hex-code">#8E9592</span>
+              <button class="copy-btn" onclick="copyHex('#8E9592')">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Color 7: Borders / UI Stroke -->
+        <div class="color-card" style="grid-column: span 1;">
+          <div class="swatch-display" style="background-color: #222624;"></div>
+          <div class="color-card-info">
+            <div class="color-name">Slate Olive</div>
+            <div class="color-role">UI stroke / Card Borders</div>
+            <div class="color-hex-row">
+              <span class="color-hex-code">#222624</span>
+              <button class="copy-btn" onclick="copyHex('#222624')">Copy</button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- TONE & VOICE SECTION -->
+  <section id="tone" class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Tone & Voice</h2>
+        <p class="section-subtitle">How Pop AI communicates: with quiet authority, extreme directness, and results-first clarity.</p>
+      </div>
+      
+      <div class="tone-voice-grid">
+        <!-- Left column: Brand vibe description -->
+        <div class="card vibe-showcase">
+          <div>
+            <span class="badge" style="margin-bottom: 20px;">The Vibe</span>
+            <div class="vibe-quote">
+              Elite, high-impact engineering meets strict aesthetic minimalism.
+            </div>
+          </div>
+          <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6;">
+            Pop AI operates like a quiet, massive force. We avoid the loud, empty noise of the tech industry, focusing entirely on high-quality systems that run efficiently. We design templates that feel structured, premium, and calm.
+          </p>
+        </div>
+        
+        <!-- Right column: Voice Characteristics with rules -->
+        <div class="characteristics-grid">
+          
+          <!-- Characteristic 1 -->
+          <div class="char-card">
+            <div class="char-title">Direct (No-Fluff)</div>
+            <div class="char-desc">Value-first communication that gets straight to the point. We speak plainly about what we build.</div>
+            <div class="char-rules">
+              <div class="char-rule">
+                <span class="char-rule-tag do">Do</span>
+                <span class="char-rule-text">Explain features clearly and state outcomes immediately.</span>
+              </div>
+              <div class="char-rule">
+                <span class="char-rule-tag dont">Don't</span>
+                <span class="char-rule-text">Hide under layers of corporate buzzwords.</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Characteristic 2 -->
+          <div class="char-card">
+            <div class="char-title">Authoritative</div>
+            <div class="char-desc">We talk with the conviction of elite engineering experts who understand the math and mechanics.</div>
+            <div class="char-rules">
+              <div class="char-rule">
+                <span class="char-rule-tag do">Do</span>
+                <span class="char-rule-text">Use precise parameters (e.g. latency, scale indices).</span>
+              </div>
+              <div class="char-rule">
+                <span class="char-rule-tag dont">Don't</span>
+                <span class="char-rule-text">Sound hesitant or use weak phrases like "we can try."</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Characteristic 3 -->
+          <div class="char-card">
+            <div class="char-title">Outcome-Obsessed</div>
+            <div class="char-desc">Every piece of technology we construct is directly mapped to a hard business metric.</div>
+            <div class="char-rules">
+              <div class="char-rule">
+                <span class="char-rule-tag do">Do</span>
+                <span class="char-rule-text">Anchor the value of AI on hours saved or revenue gains.</span>
+              </div>
+              <div class="char-rule">
+                <span class="char-rule-tag dont">Don't</span>
+                <span class="char-rule-text">Talk about models or technology in isolation.</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Characteristic 4 -->
+          <div class="char-card">
+            <div class="char-title">Grounded</div>
+            <div class="char-desc">Pragmatic and radically honest about limits. We only construct what adds true value.</div>
+            <div class="char-rules">
+              <div class="char-rule">
+                <span class="char-rule-tag do">Do</span>
+                <span class="char-rule-text">Advise clients against building useless, complex features.</span>
+              </div>
+              <div class="char-rule">
+                <span class="char-rule-tag dont">Don't</span>
+                <span class="char-rule-text">Guarantee 100% accuracy or make impossible claims.</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE VALUES SECTION -->
+  <section id="values" class="section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Core Values</h2>
+        <p class="section-subtitle">The foundational principles guiding every solution we build and every relationship we form.</p>
+      </div>
+      
+      <div class="values-grid">
+        <!-- Value 1 -->
+        <div class="card value-card">
+          <div class="value-card-header">
+            <div class="value-num">01</div>
+            <span class="badge" style="margin-bottom: 0;">Value</span>
+          </div>
+          <div>
+            <h3 class="value-title">Production Over Prototypes</h3>
+            <p class="value-desc" style="margin-top: 10px;">
+              We do not build fragile prototypes or write abstract strategy decks. We value shipped, production-ready, and scalable AI software that delivers business value from day one.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Value 2 -->
+        <div class="card value-card">
+          <div class="value-card-header">
+            <div class="value-num">02</div>
+            <span class="badge" style="margin-bottom: 0;">Value</span>
+          </div>
+          <div>
+            <h3 class="value-title">Extreme Craftsmanship</h3>
+            <p class="value-desc" style="margin-top: 10px;">
+              We are obsessed with engineering and design excellence. Whether it is code execution latency, database indexing, or pixel-perfect UI layouts, we build with meticulous attention to detail and polish.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Value 3 -->
+        <div class="card value-card">
+          <div class="value-card-header">
+            <div class="value-num">03</div>
+            <span class="badge" style="margin-bottom: 0;">Value</span>
+          </div>
+          <div>
+            <h3 class="value-title">Radical Pragmatism</h3>
+            <p class="value-desc" style="margin-top: 10px;">
+              We cut through the noise and hype. We are completely honest with our clients about what AI can and cannot do, guiding them to build only what is useful and actively preventing them from wasting resources on trends.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Value 4 -->
+        <div class="card value-card">
+          <div class="value-card-header">
+            <div class="value-num">04</div>
+            <span class="badge" style="margin-bottom: 0;">Value</span>
+          </div>
+          <div>
+            <h3 class="value-title">End-to-End Adoption</h3>
+            <p class="value-desc" style="margin-top: 10px;">
+              We believe a system is only successful if it is fully integrated. We stay through the entire process—training teams, monitoring real-world usage, and refining workflows—so that our solutions become a permanent, organic part of how our clients do business.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND GUIDELINES SUMMARY SECTION -->
+  <section id="rules" class="section" style="border-bottom: none;">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">Brand Application Rules</h2>
+        <p class="section-subtitle">Rules governing how the visual system is applied to digital layouts to guarantee consistency.</p>
+      </div>
+      
+      <div class="rules-grid">
+        <div class="card" style="background: linear-gradient(135deg, var(--color-background-card) 0%, rgba(34, 38, 36, 0.2) 100%); display: flex; flex-direction: column; justify-content: center;">
+          <h3 style="font-size: 1.5rem; color: #FFFFFF; margin-bottom: 12px;">Visual Consistency</h3>
+          <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6;">
+            A brand system is defined by its boundaries. By adhering strictly to these layout parameters, Pop AI projects maintain an elite, cohesive presence across all platforms and collateral.
+          </p>
+        </div>
+        
+        <div class="guidelines-wrap">
+          <!-- Item 1 -->
+          <div class="guideline-item">
+            <h4 class="guideline-title">
+              <span class="guideline-bullet"></span>
+              Color Allocation Rule
+            </h4>
+            <ul class="guideline-list">
+              <li class="guideline-list-item">Maintain strict Dark Mode at all times. Canvas must use Obsidian Black (#050808).</li>
+              <li class="guideline-list-item">Utilize secondary dark container shapes (#111413) to divide screen layouts.</li>
+              <li class="guideline-list-item">Apply the primary Mint Glow (#0CC481) selectively for highlighting key features, active button actions, or gradients. Never exceed 10% accent presence.</li>
+            </ul>
+          </div>
+          
+          <!-- Item 2 -->
+          <div class="guideline-item">
+            <h4 class="guideline-title">
+              <span class="guideline-bullet"></span>
+              Typography & Text Architecture
+            </h4>
+            <ul class="guideline-list">
+              <li class="guideline-list-item">Display headings exclusively in Outfit with bold weights and tight letter spacing.</li>
+              <li class="guideline-list-item">Format buttons, nav links, and metadata tags in uppercase with 0.08em wide tracking.</li>
+              <li class="guideline-list-item">Set paragraphs in Inter using the Warm Cream text color at 1.6 line height.</li>
+            </ul>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="guideline-item">
+            <h4 class="guideline-title">
+              <span class="guideline-bullet"></span>
+              Visual Mockups & Image Rules
+            </h4>
+            <ul class="guideline-list">
+              <li class="guideline-list-item">Use only clean UI mockups, terminal frames with code snippets, and thin geometric charts.</li>
+              <li class="guideline-list-item">Strictly avoid generic AI stock images (like blue network lines, brains, or humanoid robots).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="border-top: 1px solid var(--color-border); padding: 40px 0; text-align: center; background-color: var(--color-background-primary);">
+    <div class="container">
+      <p style="font-family: var(--font-headings); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-muted);">
+        &copy; 2026 Pop AI. All rights reserved. Built with extreme craftsmanship.
+      </p>
+    </div>
+  </footer>
+
+  <!-- INTERACTIVE FUNCTIONS -->
+  <script>
+    function copyHex(hexCode) {
+      // Create temporary input element
+      const tempInput = document.createElement('input');
+      tempInput.value = hexCode;
+      document.body.appendChild(tempInput);
+      
+      // Select and copy
+      tempInput.select();
+      tempInput.setSelectionRange(0, 99999); // For mobile
+      
+      try {
+        document.execCommand('copy');
+        showToast("Hex Copied: " + hexCode);
+      } catch (err) {
+        console.error('Failed to copy', err);
+      }
+      
+      document.body.removeChild(tempInput);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
